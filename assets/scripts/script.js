@@ -76,11 +76,57 @@ function handCards(array) {
   return true;
 }
 
+//displays chosen attribute from object in array into tag by its id
+function displayAttr(array, attr, displayId) {
+  const display = document.getElementById(displayId);
+
+  if (attr === 'name') {
+    display.innerHTML = array[0].name;
+  } else {
+    switch (attr) {      
+      case 'claw':
+        display.innerHTML = array[0].claw;
+        break;
+      case 'meow':
+        display.innerHTML = array[0].meow;
+        break;
+      case 'speed':
+        display.innerHTML = array[0].speed;
+        break;
+    }
+  }
+}
+
+//uses previous function to display player 1 current attributes
+function displayP1cards() {
+  displayAttr(deckP1, 'name', 'name-p1');
+  displayAttr(deckP1, 'claw', 'claw-p1');
+  displayAttr(deckP1, 'meow', 'meow-p1');
+  displayAttr(deckP1, 'speed', 'speed-p1');
+  return true;
+}
+
+//uses previous function to display player 2 current attributes
+function displayP2cards() {
+  displayAttr(deckP2, 'name', 'name-p2');
+  displayAttr(deckP2, 'claw', 'claw-p2');
+  displayAttr(deckP2, 'meow', 'meow-p2');
+  displayAttr(deckP2, 'speed', 'speed-p2');
+  return true;
+}
+
 // ====================== literals & variables ======================
 
 const deck = []; // array to store all game cards
 const deckP1 = []; // array to store each
 const deckP2 = []; // player's set of cards
+
+// ========================== DOM elements ==========================
+
+const cardP1 = document.getElementById('card-p1');
+cardP1.addEventListener('click', displayP1cards);
+const cardP2 = document.getElementById('card-p2');
+cardP2.addEventListener('click', displayP2cards);
 
 // =========================== characters =========================== [BETA VERSION]
 //constructor(name, type, gender, size)
