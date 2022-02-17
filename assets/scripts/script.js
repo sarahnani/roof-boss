@@ -115,11 +115,115 @@ function displayP2cards() {
   return true;
 }
 
+//gets p1 chosen attribute by select's name, compares with p2 attribute 
+function getAttrP1() {
+  const checked = document.querySelector(`input[name="p1-attr"]:checked`).value;
+  console.log(checked);
+  switch (checked) {
+    case 'claw':
+      if (deckP1[0].claw > deckP2[0].claw) {
+        console.log(`${deckP1[0].claw} > ${deckP2[0].claw} P1`);
+        //move a carta 0 do p2 para o p1 &
+        //passa a vez para o próximo jogador:
+        moveCard(deckP2, deckP1);
+        sendCardToBottom(deckP1);
+      } else if (deckP2[0].claw > deckP1[0].claw) {
+        console.log(`${deckP2[0].claw} > ${deckP1[0].claw} P2`);
+        //move a carta 0 do p1 para o p2 &
+        //passa a vez para o próximo jogador:
+        moveCard(deckP1, deckP2);
+        sendCardToBottom(deckP2);
+      } else {
+        console.log(`${deckP2[0].claw} = ${deckP1[0].claw} EVEN`);
+        //move a carta para o monte
+        //passa a vez para o próximo jogador
+        if (p1turn) {
+          moveCard(deckP1, pile);
+          sendCardToBottom(deckP2);
+        } else {
+          moveCard(deckP2, pile);
+          sendCardToBottom(deckP1);
+        }
+      }
+      break;
+    case 'meow':
+      if (deckP1[0].meow > deckP2[0].meow) {
+        console.log(`${deckP1[0].meow} > ${deckP2[0].meow} P1`);
+        //move a carta 0 do p2 para o p1 &
+        //passa a vez para o próximo jogador:
+        moveCard(deckP2, deckP1);
+        sendCardToBottom(deckP1);
+      } else if (deckP2[0].meow > deckP1[0].meow) {
+        console.log(`${deckP2[0].meow} > ${deckP1[0].meow} P2`);
+        //move a carta 0 do p1 para o p2 &
+        //passa a vez para o próximo jogador:
+        moveCard(deckP1, deckP2);
+        sendCardToBottom(deckP2);
+      } else {
+        console.log(`${deckP2[0].meow} = ${deckP1[0].meow} EVEN`);
+        //move a carta para o monte
+        //passa a vez para o próximo jogador
+        if (p1turn) {
+          moveCard(deckP1, pile);
+          sendCardToBottom(deckP2);
+        } else {
+          moveCard(deckP2, pile);
+          sendCardToBottom(deckP1);
+        }
+      }
+      break;
+    case 'speed':
+      if (deckP1[0].speed > deckP2[0].speed) {
+        console.log(`${deckP1[0].speed} > ${deckP2[0].speed} P1`);
+        //move a carta 0 do p2 para o p1 &
+        //passa a vez para o próximo jogador:
+        moveCard(deckP2, deckP1);
+        sendCardToBottom(deckP1);
+      } else if (deckP2[0].speed > deckP1[0].speed) {
+        console.log(`${deckP2[0].speed} > ${deckP1[0].speed} P2`);
+        //move a carta 0 do p1 para o p2 &
+        //passa a vez para o próximo jogador:
+        moveCard(deckP1, deckP2);
+        sendCardToBottom(deckP2);
+      } else {
+        console.log(`${deckP2[0].speed} = ${deckP1[0].speed} EVEN`);
+        //move a carta para o monte
+        //passa a vez para o próximo jogador
+        if (p1turn) {
+          moveCard(deckP1, pile);
+          sendCardToBottom(deckP2);
+        } else {
+          moveCard(deckP2, pile);
+          sendCardToBottom(deckP1);
+        }
+      }
+      break;
+  }
+}
+
+// pushes first element of an array to another one 
+function moveCard(fromArr, toArr) {
+  const movedCard = fromArr.splice(0, 1);
+  toArr.push(movedCard[0]);
+  p1turn = !p1turn;
+  console.log(p1turn);
+  return true;
+}
+
+// sends current card to the end of array too
+function sendCardToBottom(arr) {
+  const movedCard = arr.splice(0, 1);  
+  arr.push(movedCard[0]);
+  return true;
+}
+
 // ====================== literals & variables ======================
 
 const deck = []; // array to store all game cards
 const deckP1 = []; // array to store each
 const deckP2 = []; // player's set of cards
+let p1turn = true; // defines wether it's player 1 turn or not
+const pile = []; // array to store cards when turn output is even
 
 // ========================== DOM elements ==========================
 
@@ -127,6 +231,8 @@ const cardP1 = document.getElementById('card-p1');
 cardP1.addEventListener('click', displayP1cards);
 const cardP2 = document.getElementById('card-p2');
 cardP2.addEventListener('click', displayP2cards);
+const fightBtn = document.getElementById('fight-btn');
+fightBtn.addEventListener('click', getAttrP1);
 
 // =========================== characters =========================== [BETA VERSION]
 //constructor(name, type, gender, size)
