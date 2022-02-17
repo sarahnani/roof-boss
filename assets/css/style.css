@@ -60,7 +60,7 @@ body {
   width: 250px;
   height: 450px;
   border: 3px solid #70574E;
-  background-image: url("../img/bg-card-front.svg");
+  background-image: url("../img/svg/bg-card-front.svg");
   background-size: cover;
 }
 
