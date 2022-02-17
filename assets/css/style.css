@@ -1,0 +1,174 @@
+body {
+  width: 99vw;
+  height: 99vh;
+}
+
+.bg-img-roof {
+  background-image: url("../img/roof.jpg");
+  background-repeat: repeat;
+}
+
+.transparency {
+  background-color: #ffffff30;
+  width: 100%;
+  height: 100%;
+}
+
+.index-down {
+  z-index: -1;
+}
+
+.font-title {
+  text-align: center;
+  font-size: 15rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  filter: blur(4px);
+  /* border: 3px solid #70574e; */
+  color: #FFFBFA;
+  line-height: 200px;
+  margin-bottom: 50px;
+}
+
+.font-1 {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.font-2 {
+  font-size: 1.5rem;
+}
+
+.font-3 {
+  font-size: 3rem;
+  text-shadow: 3px 2px 4px #FFFFFF;
+}
+
+.font-4 {
+  font-size: 5rem;
+}
+
+.color-brown {
+  color: #70574E;
+}
+
+.color-ice {
+  color: #FFFBFA;
+}
+
+.card-size {
+  width: 250px;
+  height: 450px;
+  border: 3px solid #70574E;
+  background-image: url("../img/bg-card-front.svg");
+  background-size: cover;
+}
+
+.card-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 3px;
+}
+
+.card-text {
+  width: 200px;
+  height: 200px;
+}
+
+.card-text-area {
+  height: 150px;
+}
+
+.position-photo {
+  Top: 21px;
+  Left: 24px;
+}
+
+.position-text {
+  Top: 25px;
+  Left: 24px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 1600px) {
+  .font-title {
+    font-size: 11rem;
+    font-weight: 800;
+    line-height: 150px;
+    margin: 0;
+  }
+  .card-size {
+    max-width: 250px;
+    max-height: 400px;
+    background-position: center;
+    background-size: contain;
+  }
+  .card-photo {
+    width: 180px;
+    height: 180px;
+  }
+  .position-photo {
+    Top: 16px;
+    Left: 33px;
+  }
+  .card-text {
+    width: 180px;
+    height: 180px;
+  }
+  .position-text {
+    Top: 20px;
+    Left: 33px;
+  }
+  .font-4 {
+    font-size: 3.8rem;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .font-title {
+    font-size: 9rem;
+    font-weight: 900;
+    line-height: 150px;
+    margin: 0;
+  }
+  .card-size {
+    max-width: 250px;
+    max-height: 400px;
+    background-position: center;
+    background-size: contain;
+  }
+  .card-photo {
+    width: 180px;
+    height: 180px;
+  }
+  .position-photo {
+    Top: 16px;
+    Left: 33px;
+  }
+  .card-text {
+    width: 180px;
+    height: 180px;
+  }
+  .position-text {
+    Top: 20px;
+    Left: 33px;
+  }
+  .font-4 {
+    font-size: 3rem;
+  }
+  .paw-icon {
+    width: 80px;
+    height: auto;
+    margin: 1rem !important;
+  }
+}
+/* @media screen and (max-width: 1000px) {
+  .font-title {
+    text-align: center;
+    font-size: 7rem;
+    font-weight: 900;
+    line-height: 100px;
+  }
+} */
