@@ -83,7 +83,7 @@ function displayAttr(array, attr, displayId) {
   if (attr === 'name') {
     display.innerHTML = array[0].name;
   } else {
-    switch (attr) {      
+    switch (attr) {
       case 'claw':
         display.innerHTML = array[0].claw;
         break;
@@ -212,9 +212,79 @@ function moveCard(fromArr, toArr) {
 
 // sends current card to the end of array too
 function sendCardToBottom(arr) {
-  const movedCard = arr.splice(0, 1);  
+  const movedCard = arr.splice(0, 1);
   arr.push(movedCard[0]);
   return true;
+}
+
+// returns bot's highest attribute name as string
+function setBotAttr() {
+  const botAttrs = [
+    { id: 0 },
+    { id: 1 },
+    { id: 2 }
+  ];
+
+  botAttrs[0].val = deckP2[0].claw;
+  botAttrs[1].val = deckP2[0].meow;
+  botAttrs[2].val = deckP2[0].speed;
+
+  for (let i = 0; i < botAttrs.length; i++) {
+    for (let j = 0; j < botAttrs.length; j++) {
+      if (botAttrs[i].val > botAttrs[j].val) {
+        hold = botAttrs[i];
+        botAttrs[i] = botAttrs[j];
+        botAttrs[j] = hold;
+      }
+    }
+  }
+  let highest;
+
+  switch (botAttrs[0].id) {
+    case 0:
+      console.log(`claw`);
+      highest = 'claw';
+      let selected = document.getElementById('claw-field-p2');
+      selected.setAttribute('style', 'background-color:red');
+      break;
+    case 1:
+      console.log(`meow`);
+      highest = 'meow';
+      selected = document.getElementById('meow-field-p2');
+      selected.setAttribute('style', 'background-color:red');
+      break;
+    case 2:
+      console.log(`speed`);
+      highest = 'speed';
+      selected = document.getElementById('speed-field-p2');
+      selected.setAttribute('style', 'background-color:red');
+      break;
+  }
+
+  return highest;
+}
+
+function hideAndShowCards() {
+  const displayImg = './assets/img/svg/teste-img.svg';
+  const hideImg = './assets/img/svg/bg-card-front.svg';
+  if (p1turn) {
+    //hide p2 card and show p1 card
+    cardP1.setAttribute('src', displayImg);
+    displayP1cards();
+    cardP2.setAttribute('src', hideImg);
+  } else {
+    //hide p1 card and show p2 card
+    cardP1.setAttribute('src', hideImg);
+    displayP2cards();
+    cardP2.setAttribute('src', displayImg);
+  }
+}
+
+function playRound() {
+  getAttrP1();
+  displayP1cards();
+  displayP2cards();
+  hideAndShowCards();
 }
 
 // ====================== literals & variables ======================
@@ -227,12 +297,12 @@ const pile = []; // array to store cards when turn output is even
 
 // ========================== DOM elements ==========================
 
-const cardP1 = document.getElementById('card-p1');
+const cardP1 = document.getElementById('card-img-p1');
 cardP1.addEventListener('click', displayP1cards);
-const cardP2 = document.getElementById('card-p2');
+const cardP2 = document.getElementById('card-img-p2');
 cardP2.addEventListener('click', displayP2cards);
 const fightBtn = document.getElementById('fight-btn');
-fightBtn.addEventListener('click', getAttrP1);
+fightBtn.addEventListener('click', playRound);
 
 // =========================== characters =========================== [BETA VERSION]
 //constructor(name, type, gender, size)
