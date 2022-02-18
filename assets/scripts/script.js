@@ -122,81 +122,63 @@ function getAttrP1() {
   switch (checked) {
     case 'claw':
       if (deckP1[0].claw > deckP2[0].claw) {
-        console.log(`${deckP1[0].claw} > ${deckP2[0].claw} P1`);
-        //move a carta 0 do p2 para o p1 &
-        //passa a vez para o próximo jogador:
-        moveCard(deckP2, deckP1);
-        sendCardToBottom(deckP1);
+        doRoundActions(1);
+        // console.log(`${deckP1[0].claw} > ${deckP2[0].claw} P1`);
       } else if (deckP2[0].claw > deckP1[0].claw) {
-        console.log(`${deckP2[0].claw} > ${deckP1[0].claw} P2`);
-        //move a carta 0 do p1 para o p2 &
-        //passa a vez para o próximo jogador:
-        moveCard(deckP1, deckP2);
-        sendCardToBottom(deckP2);
+        doRoundActions(2);
+        // console.log(`${deckP2[0].claw} > ${deckP1[0].claw} P2`);
       } else {
-        console.log(`${deckP2[0].claw} = ${deckP1[0].claw} EVEN`);
-        //move a carta para o monte
-        //passa a vez para o próximo jogador
-        if (p1turn) {
-          moveCard(deckP1, pile);
-          sendCardToBottom(deckP2);
-        } else {
-          moveCard(deckP2, pile);
-          sendCardToBottom(deckP1);
-        }
+        doRoundActions(0);
+        // console.log(`${deckP2[0].claw} = ${deckP1[0].claw} EVEN`);
       }
       break;
     case 'meow':
       if (deckP1[0].meow > deckP2[0].meow) {
-        console.log(`${deckP1[0].meow} > ${deckP2[0].meow} P1`);
-        //move a carta 0 do p2 para o p1 &
-        //passa a vez para o próximo jogador:
-        moveCard(deckP2, deckP1);
-        sendCardToBottom(deckP1);
+        doRoundActions(1);
+        // console.log(`${deckP1[0].meow} > ${deckP2[0].meow} P1`);
       } else if (deckP2[0].meow > deckP1[0].meow) {
-        console.log(`${deckP2[0].meow} > ${deckP1[0].meow} P2`);
-        //move a carta 0 do p1 para o p2 &
-        //passa a vez para o próximo jogador:
-        moveCard(deckP1, deckP2);
-        sendCardToBottom(deckP2);
+        doRoundActions(2);
+        // console.log(`${deckP2[0].meow} > ${deckP1[0].meow} P2`);
       } else {
-        console.log(`${deckP2[0].meow} = ${deckP1[0].meow} EVEN`);
-        //move a carta para o monte
-        //passa a vez para o próximo jogador
-        if (p1turn) {
-          moveCard(deckP1, pile);
-          sendCardToBottom(deckP2);
-        } else {
-          moveCard(deckP2, pile);
-          sendCardToBottom(deckP1);
-        }
+        doRoundActions(0);
+        // console.log(`${deckP2[0].meow} = ${deckP1[0].meow} EVEN`);
       }
       break;
     case 'speed':
       if (deckP1[0].speed > deckP2[0].speed) {
-        console.log(`${deckP1[0].speed} > ${deckP2[0].speed} P1`);
-        //move a carta 0 do p2 para o p1 &
-        //passa a vez para o próximo jogador:
-        moveCard(deckP2, deckP1);
-        sendCardToBottom(deckP1);
+        doRoundActions(1);
+        // console.log(`${deckP1[0].speed} > ${deckP2[0].speed} P1`);
       } else if (deckP2[0].speed > deckP1[0].speed) {
-        console.log(`${deckP2[0].speed} > ${deckP1[0].speed} P2`);
-        //move a carta 0 do p1 para o p2 &
-        //passa a vez para o próximo jogador:
-        moveCard(deckP1, deckP2);
+        doRoundActions(2);
+        // console.log(`${deckP2[0].speed} > ${deckP1[0].speed} P2`);
+      } else {
+        doRoundActions(0);
+        // console.log(`${deckP2[0].speed} = ${deckP1[0].speed} EVEN`);
+      }
+      break;
+  }
+}
+
+// executes round actions after attribute comparison
+// winner = 1 if p1 wins / winner = 2 if p2 wins / winner = 0 if output is even
+function doRoundActions(winner) {
+  switch (winner) {
+    case 0:
+      if (p1turn) {
+        moveCard(deckP1, pile);
         sendCardToBottom(deckP2);
       } else {
-        console.log(`${deckP2[0].speed} = ${deckP1[0].speed} EVEN`);
-        //move a carta para o monte
-        //passa a vez para o próximo jogador
-        if (p1turn) {
-          moveCard(deckP1, pile);
-          sendCardToBottom(deckP2);
-        } else {
-          moveCard(deckP2, pile);
-          sendCardToBottom(deckP1);
-        }
+        moveCard(deckP2, pile);
+        sendCardToBottom(deckP1);
       }
+      break;
+    case 1:
+      moveCard(deckP2, deckP1);
+      sendCardToBottom(deckP1);
+      break;
+    case 2:
+      moveCard(deckP1, deckP2);
+      sendCardToBottom(deckP2);
       break;
   }
 }
@@ -206,7 +188,7 @@ function moveCard(fromArr, toArr) {
   const movedCard = fromArr.splice(0, 1);
   toArr.push(movedCard[0]);
   p1turn = !p1turn;
-  console.log(p1turn);
+  // console.log(p1turn);
   return true;
 }
 
@@ -299,6 +281,7 @@ const deckP1 = []; // array to store each
 const deckP2 = []; // player's set of cards
 let p1turn = true; // defines wether it's player 1 turn or not
 const pile = []; // array to store cards when turn output is even
+let roundWinner;
 
 // ========================== DOM elements ==========================
 
