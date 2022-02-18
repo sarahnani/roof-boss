@@ -269,11 +269,17 @@ function hideAndShowCards() {
   const hideImg = './assets/img/svg/bg-card-front.svg';
   if (p1turn) {
     //hide p2 card and show p1 card
+    nameP2.style.visibility = 'hidden';
+    attrSectionP2.style.visibility = 'hidden';
+    cardImgP2.style.visibility = 'hidden';
     cardP1.setAttribute('src', displayImg);
     displayP1cards();
     cardP2.setAttribute('src', hideImg);
   } else {
     //hide p1 card and show p2 card
+    nameP1.style.visibility = 'hidden';
+    attrSectionP1.style.visibility = 'hidden';
+    cardImgP1.style.visibility = 'hidden';
     cardP1.setAttribute('src', hideImg);
     displayP2cards();
     cardP2.setAttribute('src', displayImg);
@@ -284,7 +290,6 @@ function playRound() {
   getAttrP1();
   displayP1cards();
   displayP2cards();
-  hideAndShowCards();
 }
 
 // ====================== literals & variables ======================
@@ -303,6 +308,12 @@ const cardP2 = document.getElementById('card-img-p2');
 cardP2.addEventListener('click', displayP2cards);
 const fightBtn = document.getElementById('fight-btn');
 fightBtn.addEventListener('click', playRound);
+const cardImgP1 = document.getElementById('card-img-p1');
+const nameP1 = document.getElementById('name-p1');
+const attrSectionP1 = document.getElementById('attr-section-p1');
+const cardImgP2 = document.getElementById('card-img-p2');
+const nameP2 = document.getElementById('name-p2');
+const attrSectionP2 = document.getElementById('attr-section-p2');
 
 // =========================== characters =========================== [BETA VERSION]
 //constructor(name, type, gender, size)
@@ -320,3 +331,8 @@ deck.push(new Character('Alfa', 1, 1, 1));
 
 shuffle(deck);
 handCards(deck);
+displayP1cards();
+hideAndShowCards();
+//p1 a mostra com attr -> set timeout para revelar?
+//p2 oculta
+//p1 pode escolher attr
