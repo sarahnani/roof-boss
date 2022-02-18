@@ -116,7 +116,7 @@ function displayP2cards() {
 }
 
 //gets p1 chosen attribute by select's name, compares with p2 attribute 
-function getAttrP1() {
+function makeMoveP1() {
   const checked = document.querySelector(`input[name="p1-attr"]:checked`).value;
   console.log(checked);
   switch (checked) {
@@ -157,6 +157,8 @@ function getAttrP1() {
       }
       break;
   }
+  p1turn = !p1turn;
+  return p1turn;
 }
 
 // executes round actions after attribute comparison
@@ -187,7 +189,6 @@ function doRoundActions(winner) {
 function moveCard(fromArr, toArr) {
   const movedCard = fromArr.splice(0, 1);
   toArr.push(movedCard[0]);
-  p1turn = !p1turn;
   // console.log(p1turn);
   return true;
 }
@@ -246,6 +247,7 @@ function setBotAttr() {
   return highest;
 }
 
+// hides and show elements depending on whose turn it is
 function hideAndShowCards() {
   const displayImg = './assets/img/svg/teste-img.svg';
   const hideImg = './assets/img/svg/bg-card-front.svg';
@@ -281,7 +283,6 @@ const deckP1 = []; // array to store each
 const deckP2 = []; // player's set of cards
 let p1turn = true; // defines wether it's player 1 turn or not
 const pile = []; // array to store cards when turn output is even
-let roundWinner;
 
 // ========================== DOM elements ==========================
 
@@ -290,7 +291,7 @@ cardP1.addEventListener('click', displayP1cards);
 const cardP2 = document.getElementById('card-img-p2');
 cardP2.addEventListener('click', displayP2cards);
 const fightBtn = document.getElementById('fight-btn');
-fightBtn.addEventListener('click', playRound);
+fightBtn.addEventListener('click', makeMoveP1);
 const cardImgP1 = document.getElementById('card-img-p1');
 const nameP1 = document.getElementById('name-p1');
 const attrSectionP1 = document.getElementById('attr-section-p1');
