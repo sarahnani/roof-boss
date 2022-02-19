@@ -193,8 +193,9 @@ function doRoundActions(winner) {
       break;
   }
   lookForWinner();
+  showCardsDistribution();
   p1turn = !p1turn;
-  hideAndShowCards();
+  //hideAndShowCards();
 }
 
 // pushes first element of an array to another one 
@@ -297,11 +298,31 @@ function endRound() {
 function lookForWinner() {
   if (deckP1.length === 0 || deckP2.length === 0 && pile.length === 0) {
     if (p1turn) {
-      console.log('p2 wins');
+      console.log(`p2 wins with ${deckP2[deckP2.length-1].name}`);
     } else {
-      console.log('p1 wins');
+      console.log(`p1 wins with ${deckP1[deckP1.length-1].name}`);
     }
   }
+}
+
+function showCardsDistribution() {
+  const deckFieldP1 = document.getElementById('deck-field-p1');
+  deckFieldP1.innerHTML = `p1 ${deckP1.length}`;
+  const deckFieldP2 = document.getElementById('deck-field-p2');
+  deckFieldP2.innerHTML = `p2 ${deckP2.length}`;
+  const pileField = document.getElementById('pile-field');
+  if (pile.length !== 0) {
+    pileField.innerHTML = `pile ${pile.length}`;
+  } else {
+    pileField.innerHTML = '';
+  }
+}
+
+function newGame() {
+  shuffle(deck);
+  handCards(deck);
+  displayP1cards();
+  //hideAndShowCards();
 }
 
 // ====================== literals & variables ======================
@@ -340,11 +361,8 @@ deck.push(new Character('Katrina', 0, 0, 1));
 deck.push(new Character('Alfa', 1, 1, 1));
 
 // ====================== execution ======================
+//newGame();
 
-shuffle(deck);
-handCards(deck);
-displayP1cards();
-hideAndShowCards();
 //p1 a mostra com attr -> set timeout para revelar?
 //p2 oculta
 //p1 pode escolher attr
