@@ -122,42 +122,41 @@ function makeMoveP1() {
   switch (checked) {
     case 'claw':
       if (deckP1[0].claw > deckP2[0].claw) {
+        console.log(`${deckP1[0].claw} > ${deckP2[0].claw} P1`);
         doRoundActions(1);
-        // console.log(`${deckP1[0].claw} > ${deckP2[0].claw} P1`);
       } else if (deckP2[0].claw > deckP1[0].claw) {
+        console.log(`${deckP2[0].claw} > ${deckP1[0].claw} P2`);
         doRoundActions(2);
-        // console.log(`${deckP2[0].claw} > ${deckP1[0].claw} P2`);
       } else {
+        console.log(`${deckP2[0].claw} = ${deckP1[0].claw} EVEN`);
         doRoundActions(0);
-        // console.log(`${deckP2[0].claw} = ${deckP1[0].claw} EVEN`);
       }
       break;
     case 'meow':
       if (deckP1[0].meow > deckP2[0].meow) {
+        console.log(`${deckP1[0].meow} > ${deckP2[0].meow} P1`);
         doRoundActions(1);
-        // console.log(`${deckP1[0].meow} > ${deckP2[0].meow} P1`);
       } else if (deckP2[0].meow > deckP1[0].meow) {
+        console.log(`${deckP2[0].meow} > ${deckP1[0].meow} P2`);
         doRoundActions(2);
-        // console.log(`${deckP2[0].meow} > ${deckP1[0].meow} P2`);
       } else {
+        console.log(`${deckP2[0].meow} = ${deckP1[0].meow} EVEN`);
         doRoundActions(0);
-        // console.log(`${deckP2[0].meow} = ${deckP1[0].meow} EVEN`);
       }
       break;
     case 'speed':
       if (deckP1[0].speed > deckP2[0].speed) {
+        console.log(`${deckP1[0].speed} > ${deckP2[0].speed} P1`);
         doRoundActions(1);
-        // console.log(`${deckP1[0].speed} > ${deckP2[0].speed} P1`);
       } else if (deckP2[0].speed > deckP1[0].speed) {
+        console.log(`${deckP2[0].speed} > ${deckP1[0].speed} P2`);
         doRoundActions(2);
-        // console.log(`${deckP2[0].speed} > ${deckP1[0].speed} P2`);
       } else {
+        console.log(`${deckP2[0].speed} = ${deckP1[0].speed} EVEN`);
         doRoundActions(0);
-        // console.log(`${deckP2[0].speed} = ${deckP1[0].speed} EVEN`);
       }
       break;
   }
-  p1turn = !p1turn;
   return p1turn;
 }
 
@@ -177,12 +176,25 @@ function doRoundActions(winner) {
     case 1:
       moveCard(deckP2, deckP1);
       sendCardToBottom(deckP1);
+      if (pile.length !== 0) {
+        for (let i = 0; i < pile.length; i++) {
+          moveCard(pile, deckP1);
+        }
+      }
       break;
     case 2:
       moveCard(deckP1, deckP2);
       sendCardToBottom(deckP2);
+      if (pile.length !== 0) {
+        for (let i = 0; i < pile.length; i++) {
+          moveCard(pile, deckP2);
+        }
+      }
       break;
   }
+  lookForWinner();
+  p1turn = !p1turn;
+  hideAndShowCards();
 }
 
 // pushes first element of an array to another one 
@@ -249,10 +261,14 @@ function setBotAttr() {
 
 // hides and show elements depending on whose turn it is
 function hideAndShowCards() {
+
   const displayImg = './assets/img/svg/teste-img.svg';
   const hideImg = './assets/img/svg/bg-card-front.svg';
   if (p1turn) {
     //hide p2 card and show p1 card
+    nameP1.style.visibility = 'visible';
+    attrSectionP1.style.visibility = 'visible';
+    cardImgP1.style.visibility = 'visible';
     nameP2.style.visibility = 'hidden';
     attrSectionP2.style.visibility = 'hidden';
     cardImgP2.style.visibility = 'hidden';
@@ -264,16 +280,28 @@ function hideAndShowCards() {
     nameP1.style.visibility = 'hidden';
     attrSectionP1.style.visibility = 'hidden';
     cardImgP1.style.visibility = 'hidden';
+    nameP2.style.visibility = 'visible';
+    attrSectionP2.style.visibility = 'visible';
+    cardImgP2.style.visibility = 'visible';
     cardP1.setAttribute('src', hideImg);
     displayP2cards();
     cardP2.setAttribute('src', displayImg);
   }
 }
 
-function playRound() {
-  getAttrP1();
+function endRound() {
   displayP1cards();
   displayP2cards();
+}
+
+function lookForWinner() {
+  if (deckP1.length === 0 || deckP2.length === 0 && pile.length === 0) {
+    if (p1turn) {
+      console.log('p2 wins');
+    } else {
+      console.log('p1 wins');
+    }
+  }
 }
 
 // ====================== literals & variables ======================
