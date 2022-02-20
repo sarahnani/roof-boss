@@ -93,6 +93,11 @@ body {
   display: none;
 }
 
+.score-position {
+  left: 70px;
+  bottom: 10px;
+}
+
 @media screen and (max-width: 1600px) {
   .font-title {
     font-size: 11rem;

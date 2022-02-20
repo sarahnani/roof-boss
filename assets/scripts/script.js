@@ -325,6 +325,23 @@ function newGame() {
   //hideAndShowCards();
 }
 
+// set paw button animation behavior
+function showClaws() {
+  fightBtn.setAttribute('src', './assets/img/svg/claw.svg');
+  
+  const soundClaw = new Audio('/./assets/audio/claw2.mp3');
+  soundClaw.volume = 0.4;
+  soundClaw.play();
+
+  setTimeout(() => {
+    new Audio('/./assets/audio/hissing2.mp3').play();
+  }, 200);
+
+  setTimeout(() => {
+    fightBtn.setAttribute('src', './assets/img/svg/paw.svg');
+  }, 1200);
+}
+
 // ====================== literals & variables ======================
 
 const deck = []; // array to store all game cards
@@ -340,6 +357,7 @@ cardP1.addEventListener('click', displayP1cards);
 const cardP2 = document.getElementById('card-img-p2');
 cardP2.addEventListener('click', displayP2cards);
 const fightBtn = document.getElementById('fight-btn');
+
 fightBtn.addEventListener('click', makeMoveP1);
 const cardImgP1 = document.getElementById('card-img-p1');
 const nameP1 = document.getElementById('name-p1');
@@ -347,6 +365,10 @@ const attrSectionP1 = document.getElementById('attr-section-p1');
 const cardImgP2 = document.getElementById('card-img-p2');
 const nameP2 = document.getElementById('name-p2');
 const attrSectionP2 = document.getElementById('attr-section-p2');
+
+fightBtn.addEventListener('click', getAttrP1);
+fightBtn.addEventListener('click', showClaws);
+
 
 // =========================== characters =========================== [BETA VERSION]
 //constructor(name, type, gender, size)

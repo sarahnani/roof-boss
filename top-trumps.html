@@ -86,14 +86,19 @@
     </div>
 
     <div class="container-fluid position-fixed fixed-bottom">
-      <!--
-      Adicionados aqui para testar a lógica, ao criar os campos de mostrar quantidade de cartas dos jogadores e quantidade de cartas na pilha, pode excluir e colocar os ids nos campos certos 
-        <p id="deck-field-p1"></p>
-        <p id="deck-field-p2"></p>
-        <p id="pile-field"></p> 
-      -->
-      <img class="float-right m-5" src="./assets/img/svg/score.svg" alt="ícone com total de cartas na mão">
-      <img class="float-left m-5" src="./assets/img/svg/score.svg" alt="ícone com total de cartas na mão">
+
+      <div class="float-right m-5">
+        <span id="deck-field-p1" class="font-weight-bold text-light position-relative score-position">36</span>
+        <img src="./assets/img/svg/score.svg" alt="ícone com total de cartas na mão">
+      </div>
+      
+      <p id="pile-field"></p> 
+      
+      <div class="float-left m-5">
+        <span id="deck-field-p2" class="font-weight-bold text-light position-relative score-position">36</span>
+        <img src="./assets/img/svg/score.svg" alt="ícone com total de cartas na mão">
+      </div>
+
     </div>
 
   </div>
