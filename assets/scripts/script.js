@@ -296,9 +296,11 @@ function endRound() {
 function lookForWinner() {
   if (deckP1.length === 0 || deckP2.length === 0 && pile.length === 0) {
     if (p1turn) {
-      console.log(`p2 wins with ${deckP2[deckP2.length - 1].name}`);
+      // console.log(`p2 wins with ${deckP2[deckP2.length - 1].name}`);
+      changeDisplayToWinnerPage("Jogador 2 venceu!");
     } else {
-      console.log(`p1 wins with ${deckP1[deckP1.length - 1].name}`);
+      // console.log(`p1 wins with ${deckP1[deckP1.length - 1].name}`);
+      changeDisplayToWinnerPage("Jogador 1 venceu!");
     }
   }
 }
@@ -342,6 +344,61 @@ function showClaws() {
   setTimeout(() => {
     fightBtn.setAttribute('src', './assets/img/svg/paw.svg');
   }, 1200);
+}
+
+// hidden cards Animation to opponent
+function startCardOneAnimation() {
+  const card1 = document.querySelector('#hidden-card-1');
+  card1.style.animationName = "p1-wins";
+  card1.style.animationPlayState = "running";
+  setTimeout(() => {
+    card1.style.animationName = "p1-wins-return";
+    card1.style.animationPlayState = "paused";
+  }, 3000)
+}
+
+function startCardTwoAnimation() {
+  const card2 = document.querySelector('#hidden-card-2');
+  card2.style.animationName = "p2-wins";
+  card2.style.animationPlayState = "running";
+  setTimeout(() => {
+    card2.style.animationName = "p2-wins-return";
+    card2.style.animationPlayState = "paused";
+  }, 3000)
+}
+
+function startEvenCardsAnimation() {
+  const card1 = document.querySelector('#hidden-card-1');
+  const card2 = document.querySelector('#hidden-card-2');
+  card1.style.animationName = "p1-even";
+  card1.style.animationPlayState = "running";
+  card2.style.animationName = "p2-even";
+  card2.style.animationPlayState = "running";
+  setTimeout(() => {
+    card1.style.animationName = "p1-wins-return";
+    card1.style.animationPlayState = "paused";
+    card2.style.animationName = "p2-wins-return";
+    card2.style.animationPlayState = "paused";
+  }, 3000)
+}
+
+// change display of game-play and winner player's page
+function changeDisplayToHome() {
+  const home = document.getElementById("home-page");
+  const winnerPage = document.getElementById("winner-page");
+
+  home.setAttribute("class", "row d-flex flex-column align-items-center");
+  winnerPage.setAttribute("class", "row d-none align-items-center justify-content-center body-size");
+}
+
+function changeDisplayToWinnerPage(text) {
+  const textWinner = document.getElementById("text-winner");
+  const home = document.getElementById("home-page");
+  const winnerPage = document.getElementById("winner-page");
+
+  home.setAttribute("class", "row d-none flex-column align-items-center");
+  winnerPage.setAttribute("class", "row d-flex align-items-center justify-content-center body-size");
+  textWinner.innerHTML = text;
 }
 
 // ====================== literals & variables ======================

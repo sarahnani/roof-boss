@@ -1,28 +1,105 @@
 /* Player1 Wins! */
 
-#card-1 {
-  width: 210px;
+#hidden-card-1 {
+  width: 220px;
   height: auto;
-  bottom: 100px;
-  left: 20px;
-  animation-duration: 5s;
+  bottom: 360px;
+  left: 5px;
+  animation-duration: 3s;
   animation-name: p1-wins;
+  animation-play-state: paused;
   z-index: -1;
 }
 
-#card-2 {
-  width: 210px;
+#hidden-card-2 {
+  width: 220px;
   height: auto;
-  left: 65px;
-  animation-duration: 5s;
+  bottom: 360px;
+  left: 5px;
+  animation-duration: 3s;
   animation-name: p2-wins;
+  animation-play-state: paused;
+  z-index: -1;
 }
 
-/* @keyframes p1-wins {
+@keyframes p1-even {
   from {
-    left: 10px;
+    width: 220px;
+    bottom: 360px;
+    left: 5px;
   }
   to {
-    left: 500px;
+    width: 40px;
+    bottom: 80px;
+    left: 370px;
   }
-} */
+}
+
+@keyframes p2-even {
+  from {
+    width: 220px;
+    bottom: 360px;
+    left: 5px;
+  }
+  to {
+    width: 40px;
+    bottom: 80px;
+    left: -170px;
+  }
+}
+
+@keyframes p1-wins {
+  from {
+    width: 220px;
+    bottom: 360px;
+    left: 5px;
+  }
+  to {
+    width: 120px;
+    bottom: 250px;
+    left: 570px;
+  }
+}
+
+@keyframes p1-wins-return {
+  from {
+    visibility: hidden;
+    width: 120px;
+    bottom: 250px;
+    left: 570px;
+  }
+  to {
+    visibility: hidden;
+    width: 240px;
+    bottom: 390px;
+    left: 5px;
+  }
+}
+
+@keyframes p2-wins {
+  from {
+    width: 220px;
+    bottom: 360px;
+    left: 5px;
+  }
+  to {
+    width: 120px;
+    bottom: 250px;
+    left: -530px;
+  }
+}
+
+@keyframes p2-wins-return {
+  from {
+    visibility: hidden;
+    width: 120px;
+    bottom: 250px;
+    left: -530px;
+  }
+  to {
+    visibility: hidden;
+    width: 240px;
+    bottom: 390px;
+    left: 5px;
+  }
+}
