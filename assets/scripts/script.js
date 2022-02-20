@@ -193,7 +193,7 @@ function doRoundActions(winner) {
   lookForWinner();
   showCardsDistribution();
   p1turn = !p1turn;
-  //hideAndShowCards();
+  hideAndShowCards();
 }
 
 // pushes first element of an array to another one 
@@ -295,9 +295,11 @@ function endRound() {
 function lookForWinner() {
   if (deckP1.length === 0 || deckP2.length === 0 && pile.length === 0) {
     if (p1turn) {
-      console.log(`p2 wins with ${deckP2[deckP2.length - 1].name}`);
+      // console.log(`p2 wins with ${deckP2[deckP2.length - 1].name}`);
+      changeDisplayToWinnerPage("Jogador 2 venceu!");
     } else {
-      console.log(`p1 wins with ${deckP1[deckP1.length - 1].name}`);
+      // console.log(`p1 wins with ${deckP1[deckP1.length - 1].name}`);
+      changeDisplayToWinnerPage("Jogador 1 venceu!");
     }
   }
 }
@@ -320,7 +322,7 @@ function newGame() {
   handCards(deck);
   displayP1cards();
   displayP2cards();
-  //hideAndShowCards();
+  hideAndShowCards();
 }
 
 // set paw button animation behavior
@@ -374,6 +376,25 @@ function startEvenCardsAnimation() {
     card2.style.animationName = "p2-wins-return";
     card2.style.animationPlayState = "paused";
   }, 3000)
+}
+
+// change display of game-play and winner player's page
+function changeDisplayToHome() {
+  const home = document.getElementById("home-page");
+  const winnerPage = document.getElementById("winner-page");
+
+  home.setAttribute("class", "row d-flex flex-column align-items-center");
+  winnerPage.setAttribute("class", "row d-none align-items-center justify-content-center body-size");
+}
+
+function changeDisplayToWinnerPage(text) {
+  const textWinner = document.getElementById("text-winner");
+  const home = document.getElementById("home-page");
+  const winnerPage = document.getElementById("winner-page");
+
+  home.setAttribute("class", "row d-none flex-column align-items-center");
+  winnerPage.setAttribute("class", "row d-flex align-items-center justify-content-center body-size");
+  textWinner.innerHTML = text;
 }
 
 // ====================== literals & variables ======================
@@ -447,7 +468,7 @@ deck.push(new Character('36', 1, 0, 0));
 
 shuffle(deck);
 handCards(deck);
-//hideAndShowCards();
+hideAndShowCards();
 //p1 a mostra com attr -> set timeout para revelar?
 //p2 oculta
 //p1 pode escolher attr
