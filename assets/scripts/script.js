@@ -233,12 +233,13 @@ function setBotAttr() {
     }
   }
   let highest;
+  let selected;
 
   switch (botAttrs[0].id) {
     case 0:
       console.log(`claw`);
       highest = 'claw';
-      let selected = document.getElementById('claw-field-p2');
+      selected = document.getElementById('claw-field-p2');
       selected.setAttribute('style', 'background-color:red');
       break;
     case 1:
