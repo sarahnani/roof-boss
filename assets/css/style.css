@@ -148,6 +148,14 @@ button:hover {
   bottom: 15px;
 }
 
+#crown {
+  font-size: 7rem;
+  color: #f6cb09 !important;
+  text-shadow: 4px 6px 8px #583C33 !important;
+  position: relative;
+  top: 60px;
+}
+
 @media screen and (max-width: 1600px) {
   .font-title {
     font-size: 11rem;
