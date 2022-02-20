@@ -20,7 +20,7 @@
 
 <!-- ===================================== TITLE ===================================== -->
     <div class="col-md-12 d-flex flex-column align-items-center">
-      <h1 class="font-title mb-5">ROOF BOSS</h1>
+      <h1 class="font-title mb-5" onclick="startCardOneAnimation(), startCardTwoAnimation()">ROOF BOSS</h1>
     </div>
 
     <div class="container d-flex justify-content-center align-items-center">
@@ -33,7 +33,6 @@
 <!-- ===================================== CARD 1 ===================================== -->
         <div class="card-size mx-5 my-2">
           <img id="card-img-p1" class="card-photo position-relative position-photo" src="./assets/img/svg/teste-img.svg" alt="TESTE DE FOTO">
-          <!-- <img class="position-relative img-fluid" id="card-1" src="./assets/img/svg/bg-card-back.svg" alt="TESTE"> -->
           <div class="card-text position-relative position-text d-flex flex-column justify-content-around">
             <h3 id="name-p1" class="font-2 text-center text-uppercase">NOME DO GATO</h3>
             <div id="attr-section-p1" class="font-1 card-text-area text-uppercase d-flex flex-column justify-content-around">
@@ -57,6 +56,7 @@
 
             </div>
           </div>
+          <img class="position-relative img-fluid" id="hidden-card-1" src="./assets/img/svg/bg-card-back.svg" alt="TESTE">
         </div>
 
 <!-- ===================================== FIGTH SECTION ===================================== -->
@@ -67,7 +67,7 @@
           </div>
 
           <div>
-            <span id="pile-field"><img src="./assets/img/svg/minicard.svg" alt="TESTE"></span> 
+            <span id="pile-field"><img id="pile-test" src="./assets/img/svg/minicard.svg" alt="TESTE" onclick="startEvenCardsAnimation()"></span> 
           </div>
         </div>
 
@@ -96,6 +96,7 @@
 
             </div>
           </div>
+          <img class="position-relative img-fluid" id="hidden-card-2" src="./assets/img/svg/bg-card-back.svg" alt="TESTE">
         </div>
 
       </div>

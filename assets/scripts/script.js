@@ -343,6 +343,42 @@ function showClaws() {
   }, 1200);
 }
 
+// hidden cards Animation to opponent
+function startCardOneAnimation() {
+  const card1 = document.querySelector('#hidden-card-1');
+  card1.style.animationName = "p1-wins";
+  card1.style.animationPlayState = "running";
+  setTimeout(() => {
+    card1.style.animationName = "p1-wins-return";
+    card1.style.animationPlayState = "paused";
+  }, 3000)
+}
+
+function startCardTwoAnimation() {
+  const card2 = document.querySelector('#hidden-card-2');
+  card2.style.animationName = "p2-wins";
+  card2.style.animationPlayState = "running";
+  setTimeout(() => {
+    card2.style.animationName = "p2-wins-return";
+    card2.style.animationPlayState = "paused";
+  }, 3000)
+}
+
+function startEvenCardsAnimation() {
+  const card1 = document.querySelector('#hidden-card-1');
+  const card2 = document.querySelector('#hidden-card-2');
+  card1.style.animationName = "p1-even";
+  card1.style.animationPlayState = "running";
+  card2.style.animationName = "p2-even";
+  card2.style.animationPlayState = "running";
+  setTimeout(() => {
+    card1.style.animationName = "p1-wins-return";
+    card1.style.animationPlayState = "paused";
+    card2.style.animationName = "p2-wins-return";
+    card2.style.animationPlayState = "paused";
+  }, 3000)
+}
+
 // ====================== literals & variables ======================
 
 const deck = []; // array to store all game cards
