@@ -163,17 +163,4 @@ body {
   .font-4 {
     font-size: 3rem;
   }
-  .paw-icon {
-    width: 80px;
-    height: auto;
-    margin: 1rem !important;
-  }
 }
-/* @media screen and (max-width: 1000px) {
-  .font-title {
-    text-align: center;
-    font-size: 7rem;
-    font-weight: 900;
-    line-height: 100px;
-  }
-} */

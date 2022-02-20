@@ -7,6 +7,7 @@ class Character {
     this.type = type // 1 street cat, 0 house cat
     this.gender = gender // 1 male, 0 female
     this.weight = size // 1 thin, 0 fat
+    this.img = `/./assets/img/cats/${name}.png`
     this.claw = 0
     this.meow = 0
     this.speed = 0
@@ -256,14 +257,52 @@ fightBtn.addEventListener('click', showClaws);
 // =========================== characters =========================== [BETA VERSION]
 //constructor(name, type, gender, size)
 
-deck.push(new Character('Bissinho', 0, 1, 1));
-deck.push(new Character('Minuc', 0, 0, 1));
-deck.push(new Character('Piju', 1, 0, 0));
-deck.push(new Character('Massinho', 0, 1, 0));
-deck.push(new Character('Django', 0, 1, 0));
-deck.push(new Character('Feminha', 0, 0, 1));
-deck.push(new Character('Katrina', 0, 0, 1));
-deck.push(new Character('Alfa', 1, 1, 1));
+deck.push(new Character('1', 1, 1, 1));
+deck.push(new Character('2', 0, 0, 0));
+deck.push(new Character('3', 0, 0, 1));
+deck.push(new Character('4', 1, 1, 0));
+deck.push(new Character('5', 0, 0, 1));
+deck.push(new Character('6', 0, 0, 0));
+deck.push(new Character('7', 1, 1, 1));
+deck.push(new Character('8', 0, 1, 0));
+deck.push(new Character('9', 0, 1, 0));
+deck.push(new Character('10', 0, 1, 0));
+deck.push(new Character('11', 1, 1, 1));
+deck.push(new Character('12', 0, 0, 0));
+deck.push(new Character('13', 1, 0, 1));
+deck.push(new Character('14', 0, 0, 0));
+deck.push(new Character('15', 1, 0, 1));
+deck.push(new Character('16', 1, 1, 0));
+deck.push(new Character('17', 1, 0, 1));
+deck.push(new Character('18', 0, 1, 1));
+deck.push(new Character('19', 1, 0, 0));
+deck.push(new Character('20', 0, 0, 1));
+deck.push(new Character('21', 1, 0, 0));
+deck.push(new Character('22', 0, 0, 1));
+deck.push(new Character('23', 1, 1, 0));
+deck.push(new Character('24', 1, 1, 0));
+deck.push(new Character('25', 0, 1, 1));
+deck.push(new Character('26', 0, 1, 0));
+deck.push(new Character('27', 0, 1, 1));
+deck.push(new Character('28', 0, 1, 1));
+deck.push(new Character('29', 1, 0, 1));
+deck.push(new Character('30', 1, 0, 0));
+deck.push(new Character('31', 1, 1, 1));
+deck.push(new Character('32', 1, 0, 1));
+deck.push(new Character('33', 0, 0, 0));
+deck.push(new Character('34', 1, 1, 1));
+deck.push(new Character('35', 0, 1, 0));
+deck.push(new Character('36', 1, 0, 0));
+
+
+
+deck.push(new Character('2', 0, 0, 1));
+deck.push(new Character('3', 1, 0, 0));
+deck.push(new Character('4', 0, 1, 0));
+deck.push(new Character('5', 0, 1, 0));
+deck.push(new Character('6', 0, 0, 1));
+deck.push(new Character('7', 0, 0, 1));
+deck.push(new Character('8', 1, 1, 1));
 
 // ====================== execution ======================
 
