@@ -1,0 +1,28 @@
+/* Player1 Wins! */
+
+#card-1 {
+  width: 210px;
+  height: auto;
+  bottom: 100px;
+  left: 20px;
+  animation-duration: 5s;
+  animation-name: p1-wins;
+  z-index: -1;
+}
+
+#card-2 {
+  width: 210px;
+  height: auto;
+  left: 65px;
+  animation-duration: 5s;
+  animation-name: p2-wins;
+}
+
+/* @keyframes p1-wins {
+  from {
+    left: 10px;
+  }
+  to {
+    left: 500px;
+  }
+} */

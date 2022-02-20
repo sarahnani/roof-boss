@@ -105,6 +105,7 @@ body {
 .play-button {
   left: 150px;
   bottom: 15px;
+}
 
 @media screen and (max-width: 1600px) {
   .font-title {

@@ -367,7 +367,7 @@ const cardImgP2 = document.getElementById('card-img-p2');
 const nameP2 = document.getElementById('name-p2');
 const attrSectionP2 = document.getElementById('attr-section-p2');
 
-fightBtn.addEventListener('click', getAttrP1);
+// fightBtn.addEventListener('click', getAttrP1);
 fightBtn.addEventListener('click', showClaws);
 
 
