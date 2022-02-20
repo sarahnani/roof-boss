@@ -326,15 +326,6 @@ function showCardsDistribution() {
   }
 }
 
-function newGame() {
-  shuffle(deck);
-  handCards(deck);
-  displayP1cards();
-  displayP2cards();
-  hideAndShowCards();
-  showCardsDistribution();
-}
-
 // set paw button animation behavior
 function showClaws() {
   fightBtn.setAttribute('src', './assets/img/svg/claw.svg');
@@ -419,11 +410,9 @@ deck.push(new Character('35', 0, 1, 0));
 deck.push(new Character('36', 1, 0, 0));
 
 // ====================== execution ======================
-newGame();
-
-// shuffle(deck);
-// handCards(deck);
-// hideAndShowCards();
-//p1 a mostra com attr -> set timeout para revelar?
-//p2 oculta
-//p1 pode escolher attr
+shuffle(deck);
+handCards(deck);
+displayP1cards();
+displayP2cards();
+hideAndShowCards();
+showCardsDistribution();
