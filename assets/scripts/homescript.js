@@ -2,34 +2,19 @@
 
 var i = 0;
 
-var tag = document.getElementById("p1");
-var html = document.getElementById("p1").innerHTML;
-
-var tag = document.getElementById("p2");
-var html = document.getElementById("p2").innerHTML;
-
+var tag = document.getElementById("text");
+var html = document.getElementById("text").innerHTML;
 var attr = tag.setAttribute("data", html);
 var txt = tag.getAttribute("data");
-var txt2 = tag.getAttribute("data");
-
-var speed1 = 80;
-var speed2 = 500;
-
+var speed = 50;
 
 function typeWriter() {
   if (i <= txt.length) {
-    document.getElementById("p1").innerHTML = txt.slice(0, i + 1);
+    document.getElementById("text").innerHTML = txt.slice(0, i + 1);
     i++;
-    setTimeout(typeWriter, speed1);
-    
+    setTimeout(typeWriter, speed);
   }
+
 }
-// function typeWriter2() {
-//   if (b <= txt.length) {
-//     document.getElementById("p2").innerHTML = txt2.slice(0, b + 1);
-//     b++;
-//     setTimeout(typeWriter, speed2);
-//   }
-// }
 
 typeWriter();

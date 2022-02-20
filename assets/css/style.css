@@ -98,6 +98,14 @@ body {
   bottom: 10px;
 }
 
+.typewriter {
+  width: 100%;
+}
+
+.play-button {
+  left: 150px;
+  bottom: 15px;
+
 @media screen and (max-width: 1600px) {
   .font-title {
     font-size: 11rem;
