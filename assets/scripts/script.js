@@ -193,7 +193,7 @@ function doRoundActions(winner) {
   lookForWinner();
   showCardsDistribution();
   p1turn = !p1turn;
-  //hideAndShowCards();
+  hideAndShowCards();
 }
 
 // pushes first element of an array to another one 
@@ -310,17 +310,20 @@ function showCardsDistribution() {
   const pileField = document.getElementById('pile-field');
   if (pile.length !== 0) {
     pileField.innerHTML = `pile ${pile.length}`;
+    if (pile.length === 2) {
+      pileField.innerHTML += `
+      <img src="./assets/img/svg/double-minicard.svg" alt="duas cartas ocultas">`;
+    } else if (pile.length === 4) {
+      pileField.innerHTML += `
+      <img src="./assets/img/svg/double-minicard.svg" alt="duas cartas ocultas">
+      <img src="./assets/img/svg/double-minicard.svg" alt="duas cartas ocultas">`;
+    } else {
+      pileField.innerHTML += `
+      <img src="./assets/img/svg/messy-pile.svg" alt="uma pilha de cartas bagunçadas">`;
+    }
   } else {
     pileField.innerHTML = '';
   }
-}
-
-function newGame() {
-  shuffle(deck);
-  handCards(deck);
-  displayP1cards();
-  displayP2cards();
-  //hideAndShowCards();
 }
 
 // set paw button animation behavior
@@ -407,11 +410,9 @@ deck.push(new Character('35', 0, 1, 0));
 deck.push(new Character('36', 1, 0, 0));
 
 // ====================== execution ======================
-//newGame();
-
 shuffle(deck);
 handCards(deck);
-//hideAndShowCards();
-//p1 a mostra com attr -> set timeout para revelar?
-//p2 oculta
-//p1 pode escolher attr
+displayP1cards();
+displayP2cards();
+hideAndShowCards();
+showCardsDistribution();
