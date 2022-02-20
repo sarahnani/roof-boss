@@ -104,6 +104,7 @@ function displayP1cards() {
   displayAttr(deckP1, 'claw', 'claw-p1');
   displayAttr(deckP1, 'meow', 'meow-p1');
   displayAttr(deckP1, 'speed', 'speed-p1');
+  cardImgP1.setAttribute('src', deckP1[0].img);
   return true;
 }
 
@@ -113,6 +114,7 @@ function displayP2cards() {
   displayAttr(deckP2, 'claw', 'claw-p2');
   displayAttr(deckP2, 'meow', 'meow-p2');
   displayAttr(deckP2, 'speed', 'speed-p2');
+  cardImgP2.setAttribute('src', deckP2[0].img);
   return true;
 }
 
