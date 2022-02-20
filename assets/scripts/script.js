@@ -83,7 +83,7 @@ function displayAttr(array, attr, displayId) {
   if (attr === 'name') {
     display.innerHTML = array[0].name;
   } else {
-    switch (attr) {      
+    switch (attr) {
       case 'claw':
         display.innerHTML = array[0].claw;
         break;
@@ -116,105 +116,213 @@ function displayP2cards() {
 }
 
 //gets p1 chosen attribute by select's name, compares with p2 attribute 
-function getAttrP1() {
+function makeMoveP1() {
   const checked = document.querySelector(`input[name="p1-attr"]:checked`).value;
   console.log(checked);
   switch (checked) {
     case 'claw':
       if (deckP1[0].claw > deckP2[0].claw) {
         console.log(`${deckP1[0].claw} > ${deckP2[0].claw} P1`);
-        //move a carta 0 do p2 para o p1 &
-        //passa a vez para o próximo jogador:
-        moveCard(deckP2, deckP1);
-        sendCardToBottom(deckP1);
+        doRoundActions(1);
       } else if (deckP2[0].claw > deckP1[0].claw) {
         console.log(`${deckP2[0].claw} > ${deckP1[0].claw} P2`);
-        //move a carta 0 do p1 para o p2 &
-        //passa a vez para o próximo jogador:
-        moveCard(deckP1, deckP2);
-        sendCardToBottom(deckP2);
+        doRoundActions(2);
       } else {
         console.log(`${deckP2[0].claw} = ${deckP1[0].claw} EVEN`);
-        //move a carta para o monte
-        //passa a vez para o próximo jogador
-        if (p1turn) {
-          moveCard(deckP1, pile);
-          sendCardToBottom(deckP2);
-        } else {
-          moveCard(deckP2, pile);
-          sendCardToBottom(deckP1);
-        }
+        doRoundActions(0);
       }
       break;
     case 'meow':
       if (deckP1[0].meow > deckP2[0].meow) {
         console.log(`${deckP1[0].meow} > ${deckP2[0].meow} P1`);
-        //move a carta 0 do p2 para o p1 &
-        //passa a vez para o próximo jogador:
-        moveCard(deckP2, deckP1);
-        sendCardToBottom(deckP1);
+        doRoundActions(1);
       } else if (deckP2[0].meow > deckP1[0].meow) {
         console.log(`${deckP2[0].meow} > ${deckP1[0].meow} P2`);
-        //move a carta 0 do p1 para o p2 &
-        //passa a vez para o próximo jogador:
-        moveCard(deckP1, deckP2);
-        sendCardToBottom(deckP2);
+        doRoundActions(2);
       } else {
         console.log(`${deckP2[0].meow} = ${deckP1[0].meow} EVEN`);
-        //move a carta para o monte
-        //passa a vez para o próximo jogador
-        if (p1turn) {
-          moveCard(deckP1, pile);
-          sendCardToBottom(deckP2);
-        } else {
-          moveCard(deckP2, pile);
-          sendCardToBottom(deckP1);
-        }
+        doRoundActions(0);
       }
       break;
     case 'speed':
       if (deckP1[0].speed > deckP2[0].speed) {
         console.log(`${deckP1[0].speed} > ${deckP2[0].speed} P1`);
-        //move a carta 0 do p2 para o p1 &
-        //passa a vez para o próximo jogador:
-        moveCard(deckP2, deckP1);
-        sendCardToBottom(deckP1);
+        doRoundActions(1);
       } else if (deckP2[0].speed > deckP1[0].speed) {
         console.log(`${deckP2[0].speed} > ${deckP1[0].speed} P2`);
-        //move a carta 0 do p1 para o p2 &
-        //passa a vez para o próximo jogador:
-        moveCard(deckP1, deckP2);
-        sendCardToBottom(deckP2);
+        doRoundActions(2);
       } else {
         console.log(`${deckP2[0].speed} = ${deckP1[0].speed} EVEN`);
-        //move a carta para o monte
-        //passa a vez para o próximo jogador
-        if (p1turn) {
-          moveCard(deckP1, pile);
-          sendCardToBottom(deckP2);
-        } else {
-          moveCard(deckP2, pile);
-          sendCardToBottom(deckP1);
+        doRoundActions(0);
+      }
+      break;
+  }
+  return p1turn;
+}
+
+// executes round actions after attribute comparison
+// winner = 1 if p1 wins / winner = 2 if p2 wins / winner = 0 if output is even
+function doRoundActions(winner) {
+  switch (winner) {
+    case 0:
+      if (p1turn) {
+        moveCard(deckP1, pile);
+        sendCardToBottom(deckP2);
+      } else {
+        moveCard(deckP2, pile);
+        sendCardToBottom(deckP1);
+      }
+      break;
+    case 1:
+      moveCard(deckP2, deckP1);
+      sendCardToBottom(deckP1);
+      if (pile.length !== 0) {
+        for (let i = 0; i < pile.length; i++) {
+          moveCard(pile, deckP1);
+        }
+      }
+      break;
+    case 2:
+      moveCard(deckP1, deckP2);
+      sendCardToBottom(deckP2);
+      if (pile.length !== 0) {
+        for (let i = 0; i < pile.length; i++) {
+          moveCard(pile, deckP2);
         }
       }
       break;
   }
+  lookForWinner();
+  showCardsDistribution();
+  p1turn = !p1turn;
+  //hideAndShowCards();
 }
 
 // pushes first element of an array to another one 
 function moveCard(fromArr, toArr) {
   const movedCard = fromArr.splice(0, 1);
   toArr.push(movedCard[0]);
-  p1turn = !p1turn;
-  console.log(p1turn);
+  // console.log(p1turn);
   return true;
 }
 
 // sends current card to the end of array too
 function sendCardToBottom(arr) {
-  const movedCard = arr.splice(0, 1);  
+  const movedCard = arr.splice(0, 1);
   arr.push(movedCard[0]);
   return true;
+}
+
+// returns bot's highest attribute name as string
+function setBotAttr() {
+  const botAttrs = [
+    { id: 0 },
+    { id: 1 },
+    { id: 2 }
+  ];
+
+  botAttrs[0].val = deckP2[0].claw;
+  botAttrs[1].val = deckP2[0].meow;
+  botAttrs[2].val = deckP2[0].speed;
+
+  for (let i = 0; i < botAttrs.length; i++) {
+    for (let j = 0; j < botAttrs.length; j++) {
+      if (botAttrs[i].val > botAttrs[j].val) {
+        hold = botAttrs[i];
+        botAttrs[i] = botAttrs[j];
+        botAttrs[j] = hold;
+      }
+    }
+  }
+  let highest;
+
+  switch (botAttrs[0].id) {
+    case 0:
+      console.log(`claw`);
+      highest = 'claw';
+      let selected = document.getElementById('claw-field-p2');
+      selected.setAttribute('style', 'background-color:red');
+      break;
+    case 1:
+      console.log(`meow`);
+      highest = 'meow';
+      selected = document.getElementById('meow-field-p2');
+      selected.setAttribute('style', 'background-color:red');
+      break;
+    case 2:
+      console.log(`speed`);
+      highest = 'speed';
+      selected = document.getElementById('speed-field-p2');
+      selected.setAttribute('style', 'background-color:red');
+      break;
+  }
+
+  return highest;
+}
+
+// hides and show elements depending on whose turn it is
+function hideAndShowCards() {
+
+  const displayImg = './assets/img/svg/teste-img.svg';
+  const hideImg = './assets/img/svg/bg-card-front.svg';
+  if (p1turn) {
+    //hide p2 card and show p1 card
+    nameP1.style.visibility = 'visible';
+    attrSectionP1.style.visibility = 'visible';
+    cardImgP1.style.visibility = 'visible';
+    nameP2.style.visibility = 'hidden';
+    attrSectionP2.style.visibility = 'hidden';
+    cardImgP2.style.visibility = 'hidden';
+    cardP1.setAttribute('src', displayImg);
+    displayP1cards();
+    cardP2.setAttribute('src', hideImg);
+  } else {
+    //hide p1 card and show p2 card
+    nameP1.style.visibility = 'hidden';
+    attrSectionP1.style.visibility = 'hidden';
+    cardImgP1.style.visibility = 'hidden';
+    nameP2.style.visibility = 'visible';
+    attrSectionP2.style.visibility = 'visible';
+    cardImgP2.style.visibility = 'visible';
+    cardP1.setAttribute('src', hideImg);
+    displayP2cards();
+    cardP2.setAttribute('src', displayImg);
+  }
+}
+
+function endRound() {
+  displayP1cards();
+  displayP2cards();
+}
+
+function lookForWinner() {
+  if (deckP1.length === 0 || deckP2.length === 0 && pile.length === 0) {
+    if (p1turn) {
+      console.log(`p2 wins with ${deckP2[deckP2.length-1].name}`);
+    } else {
+      console.log(`p1 wins with ${deckP1[deckP1.length-1].name}`);
+    }
+  }
+}
+
+function showCardsDistribution() {
+  const deckFieldP1 = document.getElementById('deck-field-p1');
+  deckFieldP1.innerHTML = `p1 ${deckP1.length}`;
+  const deckFieldP2 = document.getElementById('deck-field-p2');
+  deckFieldP2.innerHTML = `p2 ${deckP2.length}`;
+  const pileField = document.getElementById('pile-field');
+  if (pile.length !== 0) {
+    pileField.innerHTML = `pile ${pile.length}`;
+  } else {
+    pileField.innerHTML = '';
+  }
+}
+
+function newGame() {
+  shuffle(deck);
+  handCards(deck);
+  displayP1cards();
+  //hideAndShowCards();
 }
 
 // set paw button animation behavior
@@ -234,7 +342,6 @@ function showClaws() {
   }, 1200);
 }
 
-
 // ====================== literals & variables ======================
 
 const deck = []; // array to store all game cards
@@ -245,13 +352,23 @@ const pile = []; // array to store cards when turn output is even
 
 // ========================== DOM elements ==========================
 
-const cardP1 = document.getElementById('card-p1');
+const cardP1 = document.getElementById('card-img-p1');
 cardP1.addEventListener('click', displayP1cards);
-const cardP2 = document.getElementById('card-p2');
+const cardP2 = document.getElementById('card-img-p2');
 cardP2.addEventListener('click', displayP2cards);
 const fightBtn = document.getElementById('fight-btn');
+
+fightBtn.addEventListener('click', makeMoveP1);
+const cardImgP1 = document.getElementById('card-img-p1');
+const nameP1 = document.getElementById('name-p1');
+const attrSectionP1 = document.getElementById('attr-section-p1');
+const cardImgP2 = document.getElementById('card-img-p2');
+const nameP2 = document.getElementById('name-p2');
+const attrSectionP2 = document.getElementById('attr-section-p2');
+
 fightBtn.addEventListener('click', getAttrP1);
 fightBtn.addEventListener('click', showClaws);
+
 
 // =========================== characters =========================== [BETA VERSION]
 //constructor(name, type, gender, size)
@@ -266,6 +383,8 @@ deck.push(new Character('Katrina', 0, 0, 1));
 deck.push(new Character('Alfa', 1, 1, 1));
 
 // ====================== execution ======================
+//newGame();
 
-shuffle(deck);
-handCards(deck);
+//p1 a mostra com attr -> set timeout para revelar?
+//p2 oculta
+//p1 pode escolher attr
