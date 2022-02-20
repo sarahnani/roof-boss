@@ -168,19 +168,14 @@ function makeMoveP1() {
 function doRoundActions(winner) {
   switch (winner) {
     case 0:
-      if (p1turn) {
-        moveCard(deckP1, pile);
-        sendCardToBottom(deckP2);
-      } else {
-        moveCard(deckP2, pile);
-        sendCardToBottom(deckP1);
-      }
+      moveCard(deckP1, pile);
+      moveCard(deckP2, pile);
       break;
     case 1:
       moveCard(deckP2, deckP1);
       sendCardToBottom(deckP1);
       if (pile.length !== 0) {
-        for (let i = 0; i < pile.length; i++) {
+        for (let i = 0; i <= pile.length; i++) {
           moveCard(pile, deckP1);
         }
       }
@@ -189,7 +184,7 @@ function doRoundActions(winner) {
       moveCard(deckP1, deckP2);
       sendCardToBottom(deckP2);
       if (pile.length !== 0) {
-        for (let i = 0; i < pile.length; i++) {
+        for (let i = 0; i <= pile.length; i++) {
           moveCard(pile, deckP2);
         }
       }
@@ -265,9 +260,8 @@ function setBotAttr() {
 
 // hides and show elements depending on whose turn it is
 function hideAndShowCards() {
-
-  const displayImg = './assets/img/svg/teste-img.svg';
-  const hideImg = './assets/img/svg/bg-card-front.svg';
+  const hideImg = './assets/img/svg/bg-card-back.svg';
+  const showImg = './assets/img/svg/bg-card-front.svg';
   if (p1turn) {
     //hide p2 card and show p1 card
     nameP1.style.visibility = 'visible';
@@ -276,9 +270,9 @@ function hideAndShowCards() {
     nameP2.style.visibility = 'hidden';
     attrSectionP2.style.visibility = 'hidden';
     cardImgP2.style.visibility = 'hidden';
-    cardP1.setAttribute('src', displayImg);
+    cardP2.style.backgroundImage = `url(${hideImg})`;
+    cardP1.style.backgroundImage = `url(${showImg})`;
     displayP1cards();
-    cardP2.setAttribute('src', hideImg);
   } else {
     //hide p1 card and show p2 card
     nameP1.style.visibility = 'hidden';
@@ -286,10 +280,10 @@ function hideAndShowCards() {
     cardImgP1.style.visibility = 'hidden';
     nameP2.style.visibility = 'visible';
     attrSectionP2.style.visibility = 'visible';
+    cardP1.style.backgroundImage = `url(${hideImg})`; //carta grande que contém os elementos
+    cardP2.style.backgroundImage = `url(${showImg})`;
     cardImgP2.style.visibility = 'visible';
-    cardP1.setAttribute('src', hideImg);
     displayP2cards();
-    cardP2.setAttribute('src', displayImg);
   }
 }
 
@@ -301,9 +295,9 @@ function endRound() {
 function lookForWinner() {
   if (deckP1.length === 0 || deckP2.length === 0 && pile.length === 0) {
     if (p1turn) {
-      console.log(`p2 wins with ${deckP2[deckP2.length-1].name}`);
+      console.log(`p2 wins with ${deckP2[deckP2.length - 1].name}`);
     } else {
-      console.log(`p1 wins with ${deckP1[deckP1.length-1].name}`);
+      console.log(`p1 wins with ${deckP1[deckP1.length - 1].name}`);
     }
   }
 }
@@ -325,13 +319,14 @@ function newGame() {
   shuffle(deck);
   handCards(deck);
   displayP1cards();
+  displayP2cards();
   //hideAndShowCards();
 }
 
 // set paw button animation behavior
 function showClaws() {
   fightBtn.setAttribute('src', './assets/img/svg/claw.svg');
-  
+
   const soundClaw = new Audio('/./assets/audio/claw2.mp3');
   soundClaw.volume = 0.4;
   soundClaw.play();
@@ -355,14 +350,12 @@ const pile = []; // array to store cards when turn output is even
 
 // ========================== DOM elements ==========================
 
-const cardP1 = document.getElementById('card-img-p1');
-cardP1.addEventListener('click', displayP1cards);
-const cardP2 = document.getElementById('card-img-p2');
-cardP2.addEventListener('click', displayP2cards);
+const cardP1 = document.getElementById('card-p1');
+const cardP2 = document.getElementById('card-p2');
 const fightBtn = document.getElementById('fight-btn');
 
 fightBtn.addEventListener('click', makeMoveP1);
-const cardImgP1 = document.getElementById('card-img-p1');
+const cardImgP1 = document.getElementById('card-img-p1'); //quadradinho da foto do gato
 const nameP1 = document.getElementById('name-p1');
 const attrSectionP1 = document.getElementById('attr-section-p1');
 const cardImgP2 = document.getElementById('card-img-p2');
@@ -418,6 +411,7 @@ deck.push(new Character('36', 1, 0, 0));
 
 shuffle(deck);
 handCards(deck);
+//hideAndShowCards();
 //p1 a mostra com attr -> set timeout para revelar?
 //p2 oculta
 //p1 pode escolher attr
