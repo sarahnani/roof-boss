@@ -308,14 +308,17 @@ function showCardsDistribution() {
   const deckFieldP1 = document.getElementById('deck-field-p1');
   const deckFieldP2 = document.getElementById('deck-field-p2');
   const pileField = document.getElementById('pile-field');
+  const pileFieldImg = document.getElementById('pile-field-img');
+  const pileContainer = document.getElementById('pile-container');
   
   deckFieldP1.innerHTML = deckP1.length;
   deckFieldP2.innerHTML = deckP2.length;
   if (pile.length !== 0) {
-    pileField.innerHTML = `${pile.length}
-    <img id="pile-field-img" src="./assets/img/svg/messy-pile.svg" alt="uma pilha de cartas bagunçadas">`;
+    pileContainer.style.visibility = 'visible';
+    pileField.innerHTML = `${pile.length}`;
+    pileFieldImg.setAttribute('src', './assets/img/svg/messy-pile.svg');
   } else {
-    pileField.innerHTML = '';
+    pileContainer.style.visibility = 'hidden';
   }
   return true;
 }
@@ -345,7 +348,7 @@ function startCardOneAnimation() {
   setTimeout(() => {
     card1.style.animationName = "p1-wins-return";
     card1.style.animationPlayState = "paused";
-  }, 3000);
+  }, 1000);
   return true;
 }
 
@@ -358,7 +361,7 @@ function startCardTwoAnimation() {
   setTimeout(() => {
     card2.style.animationName = "p2-wins-return";
     card2.style.animationPlayState = "paused";
-  }, 3000);
+  }, 1000);
   return true;
 }
 
@@ -376,7 +379,7 @@ function startEvenCardsAnimation() {
     card1.style.animationPlayState = "paused";
     card2.style.animationName = "p2-wins-return";
     card2.style.animationPlayState = "paused";
-  }, 3000);
+  }, 1000);
   return true;
 }
 
@@ -387,7 +390,7 @@ function startEvenCardsToP1() {
   setTimeout(() => {
     card1.style.animationName = "p1-wins";
     card1.style.animationPlayState = "paused";
-  }, 3000)
+  }, 1000)
 }
 
 function startEvenCardsToP2() {
@@ -397,7 +400,7 @@ function startEvenCardsToP2() {
   setTimeout(() => {
     card2.style.animationName = "p2-wins";
     card2.style.animationPlayState = "paused";
-  }, 3000)
+  }, 1000)
 }
 
 // change display of game-play and winner player's page
@@ -407,6 +410,7 @@ function changeDisplayToHome() {
 
   home.setAttribute("class", "row d-flex flex-column align-items-center");
   winnerPage.setAttribute("class", "row d-none align-items-center justify-content-center body-size");
+  tagAudioGameplay();
   return true;
 }
 
@@ -419,7 +423,19 @@ function changeDisplayToWinnerPage(text) {
   home.setAttribute("class", "row d-none flex-column align-items-center");
   winnerPage.setAttribute("class", "row d-flex align-items-center justify-content-center body-size");
   textWinner.innerHTML = text;
+  tagAudioWinner();
   return true;
+}
+
+// change music home and winners' page
+function tagAudioWinner() {
+  const audio = document.getElementById('vol-gameplay');
+  audio.setAttribute('src', './assets/audio/thug-life2.mp3');
+}
+
+function tagAudioGameplay() {
+  const audio = document.getElementById('vol-gameplay');
+  audio.setAttribute('src', './assets/audio/saltimbancos.mp3');
 }
 
 // ====================== literals & variables ======================

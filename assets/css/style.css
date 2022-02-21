@@ -56,8 +56,8 @@ button:hover {
 
 .font-subtitle {
   text-align: center;
-  font-size: 13rem;
-  font-weight: 700;
+  font-size: 9rem;
+  font-weight: 900;
   letter-spacing: 0.1em;
   filter: blur(4px);
   /* border: 3px solid #70574e; */
@@ -198,6 +198,10 @@ button:hover {
   .font-4 {
     font-size: 3.8rem;
   }
+}
+
+#pile-field {
+  top: 80px;
 }
 
 @media screen and (max-width: 1200px) {

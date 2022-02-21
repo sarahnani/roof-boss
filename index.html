@@ -13,6 +13,7 @@
 </head>
 
 <body class="bg-img-roof">
+  
   <div class="container-fluid transparency index-down position-fixed"></div>
 
   <div class="container-fluid d-flex flex-column align-items-center">
@@ -38,6 +39,13 @@
       </div>
     </div>
   </div>
+
+
+  <audio id="vol-home" src="./assets/audio/saltimbancos.mp3" autoplay="autoplay" loop="loop"></audio>
+  <script>
+    const audioHome = document.getElementById('vol-home');
+    audioHome.volume = 0.1;
+  </script>
 
   <script src="./assets/scripts/homescript.js"></script>
   <!-- import boostrap js with popper and jquery -->
