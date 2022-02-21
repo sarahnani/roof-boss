@@ -116,11 +116,18 @@ function displayP2cards() {
 }
 
 //gets p1 chosen attribute by select's name, compares with p2 attribute 
-function makeMoveP1() {
-  const checked = document.querySelector(`input[name="p1-attr"]:checked`).value;
-  
-  console.log(checked);
-  switch (checked) {
+function makeMove() {
+  if (p1turn) {
+    //checa os attr do p1
+    checked = document.querySelector(`input[name="p1-attr"]:checked`);
+    console.log(checked.value + ' do p1');
+    
+  } else {
+    //checa os attr do p2
+    checked = document.querySelector(`input[name="p2-attr"]:checked`);
+    console.log(checked.value + ' do p2');
+  }
+  switch (checked.value) {
     case 'claw':
       if (deckP1[0].claw > deckP2[0].claw) {
         console.log(`${deckP1[0].claw} > ${deckP2[0].claw} P1`);
@@ -265,7 +272,7 @@ function setBotAttr() {
 function hideAndShowCards() {
   const hideImg = './assets/img/svg/bg-card-back.svg';
   const showImg = './assets/img/svg/bg-card-front.svg';
-  
+
   if (p1turn) {
     //hide p2 card and show p1 card
     nameP1.style.visibility = 'visible';
@@ -308,7 +315,7 @@ function showCardsDistribution() {
   const deckFieldP1 = document.getElementById('deck-field-p1');
   const deckFieldP2 = document.getElementById('deck-field-p2');
   const pileField = document.getElementById('pile-field');
-  
+
   deckFieldP1.innerHTML = deckP1.length;
   deckFieldP2.innerHTML = deckP2.length;
   if (pile.length !== 0) {
@@ -322,17 +329,17 @@ function showCardsDistribution() {
 
 // set paw button animation behavior
 function showClaws() {
-  const soundClaw = new Audio('/./assets/audio/claw2.mp3');
-  
-  fightBtn.setAttribute('src', './assets/img/svg/claw.svg');
-  soundClaw.volume = 0.4;
-  soundClaw.play();
-  setTimeout(() => {
-    new Audio('/./assets/audio/hissing2.mp3').play();
-  }, 200);
-  setTimeout(() => {
-    fightBtn.setAttribute('src', './assets/img/svg/paw.svg');
-  }, 1200);
+    const soundClaw = new Audio('/./assets/audio/claw2.mp3');
+
+    fightBtn.setAttribute('src', './assets/img/svg/claw.svg');
+    soundClaw.volume = 0.4;
+    soundClaw.play();
+    setTimeout(() => {
+      new Audio('/./assets/audio/hissing2.mp3').play();
+    }, 200);
+    setTimeout(() => {
+      fightBtn.setAttribute('src', './assets/img/svg/paw.svg');
+    }, 1200);
   return true;
 }
 
@@ -422,12 +429,32 @@ function changeDisplayToWinnerPage(text) {
   return true;
 }
 
+function clearArray(array) {
+  for (let i = 0; i < array.length; i++) {
+    array.pop();
+  }
+  return array;
+}
+
+function newGame() {
+  p1turn = true;
+  checked = '';
+  shuffle(deck);
+  handCards(deck);
+  displayP1cards();
+  displayP2cards();
+  hideAndShowCards();
+  showCardsDistribution();
+  return true;
+}
+
 // ====================== literals & variables ======================
 
 const deck = []; // array to store all game cards
 const deckP1 = []; // array to store each
 const deckP2 = []; // player's set of cards
 let p1turn = true; // defines wether it's player 1 turn or not
+let checked;
 const pile = []; // array to store cards when turn output is even
 
 // ========================== DOM elements ==========================
@@ -441,6 +468,7 @@ const cardP2 = document.getElementById('card-p2');
 const cardImgP2 = document.getElementById('card-img-p2');
 const nameP2 = document.getElementById('name-p2');
 const attrSectionP2 = document.getElementById('attr-section-p2');
+const homeBtn = document.getElementById('home-btn');
 
 // =========================== characters =========================== [BETA VERSION]
 //constructor(name, type, gender, size)
@@ -449,46 +477,41 @@ deck.push(new Character('1', 1, 1, 1));
 deck.push(new Character('2', 0, 0, 0));
 deck.push(new Character('3', 0, 0, 1));
 deck.push(new Character('4', 1, 1, 0));
-deck.push(new Character('5', 0, 0, 1));
-deck.push(new Character('6', 0, 0, 0));
-deck.push(new Character('7', 1, 1, 1));
-deck.push(new Character('8', 0, 1, 0));
-deck.push(new Character('9', 0, 1, 0));
-deck.push(new Character('10', 0, 1, 0));
-deck.push(new Character('11', 1, 1, 1));
-deck.push(new Character('12', 0, 0, 0));
-deck.push(new Character('13', 1, 0, 1));
-deck.push(new Character('14', 0, 0, 0));
-deck.push(new Character('15', 1, 0, 1));
-deck.push(new Character('16', 1, 1, 0));
-deck.push(new Character('17', 1, 0, 1));
-deck.push(new Character('18', 0, 1, 1));
-deck.push(new Character('19', 1, 0, 0));
-deck.push(new Character('20', 0, 0, 1));
-deck.push(new Character('21', 1, 0, 0));
-deck.push(new Character('22', 0, 0, 1));
-deck.push(new Character('23', 1, 1, 0));
-deck.push(new Character('24', 1, 1, 0));
-deck.push(new Character('25', 0, 1, 1));
-deck.push(new Character('26', 0, 1, 0));
-deck.push(new Character('27', 0, 1, 1));
-deck.push(new Character('28', 0, 1, 1));
-deck.push(new Character('29', 1, 0, 1));
-deck.push(new Character('30', 1, 0, 0));
-deck.push(new Character('31', 1, 1, 1));
-deck.push(new Character('32', 1, 0, 1));
-deck.push(new Character('33', 0, 0, 0));
-deck.push(new Character('34', 1, 1, 1));
-deck.push(new Character('35', 0, 1, 0));
-deck.push(new Character('36', 1, 0, 0));
+// deck.push(new Character('5', 0, 0, 1));
+// deck.push(new Character('6', 0, 0, 0));
+// deck.push(new Character('7', 1, 1, 1));
+// deck.push(new Character('8', 0, 1, 0));
+// deck.push(new Character('9', 0, 1, 0));
+// deck.push(new Character('10', 0, 1, 0));
+// deck.push(new Character('11', 1, 1, 1));
+// deck.push(new Character('12', 0, 0, 0));
+// deck.push(new Character('13', 1, 0, 1));
+// deck.push(new Character('14', 0, 0, 0));
+// deck.push(new Character('15', 1, 0, 1));
+// deck.push(new Character('16', 1, 1, 0));
+// deck.push(new Character('17', 1, 0, 1));
+// deck.push(new Character('18', 0, 1, 1));
+// deck.push(new Character('19', 1, 0, 0));
+// deck.push(new Character('20', 0, 0, 1));
+// deck.push(new Character('21', 1, 0, 0));
+// deck.push(new Character('22', 0, 0, 1));
+// deck.push(new Character('23', 1, 1, 0));
+// deck.push(new Character('24', 1, 1, 0));
+// deck.push(new Character('25', 0, 1, 1));
+// deck.push(new Character('26', 0, 1, 0));
+// deck.push(new Character('27', 0, 1, 1));
+// deck.push(new Character('28', 0, 1, 1));
+// deck.push(new Character('29', 1, 0, 1));
+// deck.push(new Character('30', 1, 0, 0));
+// deck.push(new Character('31', 1, 1, 1));
+// deck.push(new Character('32', 1, 0, 1));
+// deck.push(new Character('33', 0, 0, 0));
+// deck.push(new Character('34', 1, 1, 1));
+// deck.push(new Character('35', 0, 1, 0));
+// deck.push(new Character('36', 1, 0, 0));
 
 // ====================== execution ======================
 
 fightBtn.addEventListener('click', showClaws);
-fightBtn.addEventListener('click', makeMoveP1);
-shuffle(deck);
-handCards(deck);
-displayP1cards();
-displayP2cards();
-hideAndShowCards();
-showCardsDistribution();
+fightBtn.addEventListener('click', makeMove);
+newGame();
