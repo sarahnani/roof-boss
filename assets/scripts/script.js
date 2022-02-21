@@ -14,19 +14,19 @@ class Character {
 
   setAttributes() {
     if (this.type) {
-      this.claw = getRandomBetween(6, 10);
+      this.claw = getRandomBetween(60, 100);
     } else {
-      this.claw = getRandomBetween(2, 8);
+      this.claw = getRandomBetween(20, 80);
     }
     if (this.gender) {
-      this.meow = getRandomBetween(6, 10, this.claw);
+      this.meow = getRandomBetween(60, 100, this.claw);
     } else {
-      this.meow = getRandomBetween(2, 8, this.claw);
+      this.meow = getRandomBetween(20, 80, this.claw);
     }
     if (this.size) {
-      this.speed = getRandomBetween(6, 10, this.claw, this.size);
+      this.speed = getRandomBetween(60, 100, this.claw, this.size);
     } else {
-      this.speed = getRandomBetween(2, 8, this.claw, this.size);
+      this.speed = getRandomBetween(20, 80, this.claw, this.size);
     }
   }
 }
@@ -165,7 +165,7 @@ function makeMove() {
       }
       break;
   }
-  return p1turn;
+  return true;
 }
 
 // executes round actions after attribute comparison
@@ -301,11 +301,14 @@ function hideAndShowCards() {
 
 // checks for winning condition and declares winner
 function lookForWinner() {
+  const winnerImg = document.getElementById('winner-img');
   if (deckP1.length === 0 || deckP2.length === 0 && pile.length === 0) {
     if (p1turn) {
       changeDisplayToWinnerPage("Jogador 2 venceu!");
+      winnerImg.setAttribute('src', deckP2[deckP2.length - 1].img);
     } else {
       changeDisplayToWinnerPage("Jogador 1 venceu!");
+      winnerImg.setAttribute('src', deckP1[deckP1.length - 1].img);
     }
   }
   return true;
@@ -397,7 +400,8 @@ function startEvenCardsToP1() {
   setTimeout(() => {
     card1.style.animationName = "p1-wins";
     card1.style.animationPlayState = "paused";
-  }, 1000)
+  }, 1000);
+  return true;
 }
 
 function startEvenCardsToP2() {
@@ -407,7 +411,8 @@ function startEvenCardsToP2() {
   setTimeout(() => {
     card2.style.animationName = "p2-wins";
     card2.style.animationPlayState = "paused";
-  }, 1000)
+  }, 1000);
+  return true;
 }
 
 // change display of game-play and winner player's page
@@ -435,13 +440,18 @@ function changeDisplayToWinnerPage(text) {
 }
 
 function clearArray(array) {
+  console.log(`limpei o ${array}`);
   for (let i = 0; i < array.length; i++) {
     array.pop();
   }
-  return array;
+  return true;
 }
 
 function newGame() {
+  console.log('novo jogo bro');
+  clearArray(deckP1);
+  clearArray(deckP2);
+  clearArray(pile);
   p1turn = true;
   checked = '';
   shuffle(deck);
@@ -469,9 +479,9 @@ function tagAudioGameplay() {
 const deck = []; // array to store all game cards
 const deckP1 = []; // array to store each
 const deckP2 = []; // player's set of cards
-let p1turn = true; // defines wether it's player 1 turn or not
-let checked;
 const pile = []; // array to store cards when turn output is even
+let p1turn = true; // defines wether it's player 1 turn or not
+let checked; // stores checked value of attribute to be compared
 
 // ========================== DOM elements ==========================
 
@@ -484,29 +494,28 @@ const cardP2 = document.getElementById('card-p2');
 const cardImgP2 = document.getElementById('card-img-p2');
 const nameP2 = document.getElementById('name-p2');
 const attrSectionP2 = document.getElementById('attr-section-p2');
-const homeBtn = document.getElementById('home-btn');
 
-// =========================== characters =========================== [BETA VERSION]
+// =========================== characters ===========================
 //constructor(name, type, gender, size)
 
+deck.push(new Character('copelia', 0, 0, 1));
+deck.push(new Character('katrina', 0, 0, 0));
+deck.push(new Character('fabinho', 0, 1, 0));
+deck.push(new Character('juanito', 0, 1, 1));
 deck.push(new Character('siam', 1, 1, 1));
 deck.push(new Character('feminha', 0, 0, 0));
 deck.push(new Character('piju', 0, 0, 1));
 deck.push(new Character('massinho', 1, 1, 0));
-deck.push(new Character('copelia', 0, 0, 1));
 deck.push(new Character('jamile', 0, 0, 0));
 deck.push(new Character('valtinho', 1, 1, 1));
 deck.push(new Character('django', 0, 1, 0));
-deck.push(new Character('fabinho', 0, 1, 0));
 deck.push(new Character('bartolomeu', 0, 1, 0));
 deck.push(new Character('bissinho', 1, 1, 1));
 deck.push(new Character('dora', 0, 0, 0));
 deck.push(new Character('belezinha', 1, 0, 1));
-deck.push(new Character('katrina', 0, 0, 0));
 deck.push(new Character('mizinha', 1, 0, 1));
 deck.push(new Character('figaro', 1, 1, 0));
 deck.push(new Character('duquesa', 1, 0, 1));
-deck.push(new Character('juanito', 0, 1, 1));
 deck.push(new Character('izma', 1, 0, 0));
 deck.push(new Character('dinah', 0, 0, 1));
 deck.push(new Character('felicia', 1, 0, 0));
