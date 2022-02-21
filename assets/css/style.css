@@ -200,10 +200,6 @@ button:hover {
   }
 }
 
-#pile-test {
-  z-index: 2;
-}
-
 @media screen and (max-width: 1200px) {
   .font-title {
     font-size: 9rem;

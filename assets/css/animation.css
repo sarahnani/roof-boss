@@ -103,3 +103,31 @@
     left: 5px;
   }
 }
+
+@keyframes pile-to-p1 {
+  from {
+    width: 40px;
+    bottom: 80px;
+    left: 370px;
+  }
+  to {
+    visibility: hidden;
+    width: 240px;
+    bottom: 390px;
+    left: 5px;
+  }
+}
+
+@keyframes pile-to-p2 {
+  from {
+    width: 40px;
+    bottom: 80px;
+    left: -170px;
+  }
+  to {
+    visibility: hidden;
+    width: 220px;
+    bottom: 360px;
+    left: 5px;
+  }
+}

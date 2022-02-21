@@ -177,6 +177,7 @@ function doRoundActions(winner) {
       moveCard(deckP2, deckP1);
       sendCardToBottom(deckP1);
       if (pile.length !== 0) {
+        startEvenCardsToP1();
         for (let i = 0; i <= pile.length; i++) {
           moveCard(pile, deckP1);
         }
@@ -187,6 +188,7 @@ function doRoundActions(winner) {
       moveCard(deckP1, deckP2);
       sendCardToBottom(deckP2);
       if (pile.length !== 0) {
+        startEvenCardsToP2();
         for (let i = 0; i <= pile.length; i++) {
           moveCard(pile, deckP2);
         }
@@ -316,7 +318,7 @@ function showCardsDistribution() {
   const pileField = document.getElementById('pile-field');
   if (pile.length !== 0) {
     pileField.innerHTML = `pile ${pile.length}
-    <img src="./assets/img/svg/messy-pile.svg" alt="uma pilha de cartas bagunçadas">`;
+    <img id="pile-field-img" src="./assets/img/svg/messy-pile.svg" alt="uma pilha de cartas bagunçadas">`;
   } else {
     pileField.innerHTML = '';
   }
@@ -371,6 +373,26 @@ function startEvenCardsAnimation() {
     card1.style.animationName = "p1-wins-return";
     card1.style.animationPlayState = "paused";
     card2.style.animationName = "p2-wins-return";
+    card2.style.animationPlayState = "paused";
+  }, 3000)
+}
+
+function startEvenCardsToP1() {
+  const card1 = document.querySelector('#hidden-card-1');
+  card1.style.animationName = "pile-to-p1";
+  card1.style.animationPlayState = "running";
+  setTimeout(() => {
+    card1.style.animationName = "p1-wins";
+    card1.style.animationPlayState = "paused";
+  }, 3000)
+}
+
+function startEvenCardsToP2() {
+  const card2 = document.querySelector('#hidden-card-2');
+  card2.style.animationName = "pile-to-p2";
+  card2.style.animationPlayState = "running";
+  setTimeout(() => {
+    card2.style.animationName = "p2-wins";
     card2.style.animationPlayState = "paused";
   }, 3000)
 }
