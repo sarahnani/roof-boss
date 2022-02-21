@@ -156,7 +156,8 @@ button:hover {
   top: 60px;
 }
 
-.attr-select:hover {
+.attr-select:hover, label:hover {
+  cursor: pointer;
   background-color: #f6cb09 !important;
   padding: 0 5px;
 }
