@@ -168,10 +168,12 @@ function makeMoveP1() {
 function doRoundActions(winner) {
   switch (winner) {
     case 0:
+      startEvenCardsAnimation();
       moveCard(deckP1, pile);
       moveCard(deckP2, pile);
       break;
     case 1:
+      startCardTwoAnimation();
       moveCard(deckP2, deckP1);
       sendCardToBottom(deckP1);
       if (pile.length !== 0) {
@@ -181,6 +183,7 @@ function doRoundActions(winner) {
       }
       break;
     case 2:
+      startCardOneAnimation();
       moveCard(deckP1, deckP2);
       sendCardToBottom(deckP2);
       if (pile.length !== 0) {
