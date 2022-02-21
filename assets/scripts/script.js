@@ -312,18 +312,8 @@ function showCardsDistribution() {
   deckFieldP2.innerHTML = `p2 ${deckP2.length}`;
   const pileField = document.getElementById('pile-field');
   if (pile.length !== 0) {
-    pileField.innerHTML = `pile ${pile.length}`;
-    if (pile.length === 2) {
-      pileField.innerHTML += `
-      <img src="./assets/img/svg/double-minicard.svg" alt="duas cartas ocultas">`;
-    } else if (pile.length === 4) {
-      pileField.innerHTML += `
-      <img src="./assets/img/svg/double-minicard.svg" alt="duas cartas ocultas">
-      <img src="./assets/img/svg/double-minicard.svg" alt="duas cartas ocultas">`;
-    } else {
-      pileField.innerHTML += `
-      <img src="./assets/img/svg/messy-pile.svg" alt="uma pilha de cartas bagunçadas">`;
-    }
+    pileField.innerHTML = `pile ${pile.length}
+    <img src="./assets/img/svg/messy-pile.svg" alt="uma pilha de cartas bagunçadas">`;
   } else {
     pileField.innerHTML = '';
   }
