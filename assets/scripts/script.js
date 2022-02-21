@@ -1,5 +1,3 @@
-/////////FORK
-
 // ========================== creating class ==========================
 class Character {
   constructor(name, type, gender, size) {
@@ -32,7 +30,6 @@ class Character {
     }
   }
 }
-
 // ============================= functions =============================
 
 //returns a random number in a range set as parameter
@@ -66,7 +63,6 @@ function shuffle(array) {
 
 //hands cards to both playes one by one
 function handCards(array) {
-
   for (let i = 0; i < array.length; i++) {
     if (i % 2 === 1) {
       deckP1.push(deck[i]);
@@ -96,6 +92,7 @@ function displayAttr(array, attr, displayId) {
         break;
     }
   }
+  return true;
 }
 
 //uses previous function to display player 1 current attributes
@@ -121,6 +118,7 @@ function displayP2cards() {
 //gets p1 chosen attribute by select's name, compares with p2 attribute 
 function makeMoveP1() {
   const checked = document.querySelector(`input[name="p1-attr"]:checked`).value;
+  
   console.log(checked);
   switch (checked) {
     case 'claw':
@@ -164,7 +162,7 @@ function makeMoveP1() {
 }
 
 // executes round actions after attribute comparison
-// winner = 1 if p1 wins / winner = 2 if p2 wins / winner = 0 if output is even
+// winner = 0 if output is even / winner = 1 if p1 wins / winner = 2 if p2 wins
 function doRoundActions(winner) {
   switch (winner) {
     case 0:
@@ -199,19 +197,21 @@ function doRoundActions(winner) {
   showCardsDistribution();
   p1turn = !p1turn;
   hideAndShowCards();
+  return true;
 }
 
 // pushes first element of an array to another one 
 function moveCard(fromArr, toArr) {
   const movedCard = fromArr.splice(0, 1);
+
   toArr.push(movedCard[0]);
-  // console.log(p1turn);
   return true;
 }
 
 // sends current card to the end of array too
 function sendCardToBottom(arr) {
   const movedCard = arr.splice(0, 1);
+
   arr.push(movedCard[0]);
   return true;
 }
@@ -223,11 +223,12 @@ function setBotAttr() {
     { id: 1 },
     { id: 2 }
   ];
+  let highest;
+  let selected;
 
   botAttrs[0].val = deckP2[0].claw;
   botAttrs[1].val = deckP2[0].meow;
   botAttrs[2].val = deckP2[0].speed;
-
   for (let i = 0; i < botAttrs.length; i++) {
     for (let j = 0; j < botAttrs.length; j++) {
       if (botAttrs[i].val > botAttrs[j].val) {
@@ -237,9 +238,6 @@ function setBotAttr() {
       }
     }
   }
-  let highest;
-  let selected;
-
   switch (botAttrs[0].id) {
     case 0:
       console.log(`claw`);
@@ -260,7 +258,6 @@ function setBotAttr() {
       selected.setAttribute('style', 'background-color:red');
       break;
   }
-
   return highest;
 }
 
@@ -268,6 +265,7 @@ function setBotAttr() {
 function hideAndShowCards() {
   const hideImg = './assets/img/svg/bg-card-back.svg';
   const showImg = './assets/img/svg/bg-card-front.svg';
+  
   if (p1turn) {
     //hide p2 card and show p1 card
     nameP1.style.visibility = 'visible';
@@ -291,80 +289,84 @@ function hideAndShowCards() {
     cardImgP2.style.visibility = 'visible';
     displayP2cards();
   }
+  return true;
 }
 
-function endRound() {
-  displayP1cards();
-  displayP2cards();
-}
-
+// checks for winning condition and declares winner
 function lookForWinner() {
   if (deckP1.length === 0 || deckP2.length === 0 && pile.length === 0) {
     if (p1turn) {
-      // console.log(`p2 wins with ${deckP2[deckP2.length - 1].name}`);
       changeDisplayToWinnerPage("Jogador 2 venceu!");
     } else {
-      // console.log(`p1 wins with ${deckP1[deckP1.length - 1].name}`);
       changeDisplayToWinnerPage("Jogador 1 venceu!");
     }
   }
+  return true;
 }
 
 function showCardsDistribution() {
   const deckFieldP1 = document.getElementById('deck-field-p1');
-  deckFieldP1.innerHTML = `p1 ${deckP1.length}`;
   const deckFieldP2 = document.getElementById('deck-field-p2');
-  deckFieldP2.innerHTML = `p2 ${deckP2.length}`;
   const pileField = document.getElementById('pile-field');
+  
+  deckFieldP1.innerHTML = deckP1.length;
+  deckFieldP2.innerHTML = deckP2.length;
   if (pile.length !== 0) {
-    pileField.innerHTML = `pile ${pile.length}
+    pileField.innerHTML = `${pile.length}
     <img id="pile-field-img" src="./assets/img/svg/messy-pile.svg" alt="uma pilha de cartas bagunçadas">`;
   } else {
     pileField.innerHTML = '';
   }
+  return true;
 }
 
 // set paw button animation behavior
 function showClaws() {
-  fightBtn.setAttribute('src', './assets/img/svg/claw.svg');
-
   const soundClaw = new Audio('/./assets/audio/claw2.mp3');
+  
+  fightBtn.setAttribute('src', './assets/img/svg/claw.svg');
   soundClaw.volume = 0.4;
   soundClaw.play();
-
   setTimeout(() => {
     new Audio('/./assets/audio/hissing2.mp3').play();
   }, 200);
-
   setTimeout(() => {
     fightBtn.setAttribute('src', './assets/img/svg/paw.svg');
   }, 1200);
+  return true;
 }
 
-// hidden cards Animation to opponent
+// animation to move card from p1 to p2
 function startCardOneAnimation() {
   const card1 = document.querySelector('#hidden-card-1');
+
   card1.style.animationName = "p1-wins";
   card1.style.animationPlayState = "running";
   setTimeout(() => {
     card1.style.animationName = "p1-wins-return";
     card1.style.animationPlayState = "paused";
-  }, 3000)
+  }, 3000);
+  return true;
 }
 
+// animation to move card from p2 to p1
 function startCardTwoAnimation() {
   const card2 = document.querySelector('#hidden-card-2');
+
   card2.style.animationName = "p2-wins";
   card2.style.animationPlayState = "running";
   setTimeout(() => {
     card2.style.animationName = "p2-wins-return";
     card2.style.animationPlayState = "paused";
-  }, 3000)
+  }, 3000);
+  return true;
 }
 
+// animation to move cards from p1 and p2 to pile
 function startEvenCardsAnimation() {
   const card1 = document.querySelector('#hidden-card-1');
   const card2 = document.querySelector('#hidden-card-2');
+
   card1.style.animationName = "p1-even";
   card1.style.animationPlayState = "running";
   card2.style.animationName = "p2-even";
@@ -374,7 +376,8 @@ function startEvenCardsAnimation() {
     card1.style.animationPlayState = "paused";
     card2.style.animationName = "p2-wins-return";
     card2.style.animationPlayState = "paused";
-  }, 3000)
+  }, 3000);
+  return true;
 }
 
 function startEvenCardsToP1() {
@@ -404,8 +407,10 @@ function changeDisplayToHome() {
 
   home.setAttribute("class", "row d-flex flex-column align-items-center");
   winnerPage.setAttribute("class", "row d-none align-items-center justify-content-center body-size");
+  return true;
 }
 
+// change element display to show winner page and hide gameplay
 function changeDisplayToWinnerPage(text) {
   const textWinner = document.getElementById("text-winner");
   const home = document.getElementById("home-page");
@@ -414,6 +419,7 @@ function changeDisplayToWinnerPage(text) {
   home.setAttribute("class", "row d-none flex-column align-items-center");
   winnerPage.setAttribute("class", "row d-flex align-items-center justify-content-center body-size");
   textWinner.innerHTML = text;
+  return true;
 }
 
 // ====================== literals & variables ======================
@@ -426,21 +432,15 @@ const pile = []; // array to store cards when turn output is even
 
 // ========================== DOM elements ==========================
 
-const cardP1 = document.getElementById('card-p1');
-const cardP2 = document.getElementById('card-p2');
 const fightBtn = document.getElementById('fight-btn');
-
-fightBtn.addEventListener('click', makeMoveP1);
-const cardImgP1 = document.getElementById('card-img-p1'); //quadradinho da foto do gato
+const cardP1 = document.getElementById('card-p1');
+const cardImgP1 = document.getElementById('card-img-p1');
 const nameP1 = document.getElementById('name-p1');
 const attrSectionP1 = document.getElementById('attr-section-p1');
+const cardP2 = document.getElementById('card-p2');
 const cardImgP2 = document.getElementById('card-img-p2');
 const nameP2 = document.getElementById('name-p2');
 const attrSectionP2 = document.getElementById('attr-section-p2');
-
-// fightBtn.addEventListener('click', getAttrP1);
-fightBtn.addEventListener('click', showClaws);
-
 
 // =========================== characters =========================== [BETA VERSION]
 //constructor(name, type, gender, size)
@@ -483,6 +483,9 @@ deck.push(new Character('35', 0, 1, 0));
 deck.push(new Character('36', 1, 0, 0));
 
 // ====================== execution ======================
+
+fightBtn.addEventListener('click', showClaws);
+fightBtn.addEventListener('click', makeMoveP1);
 shuffle(deck);
 handCards(deck);
 displayP1cards();
