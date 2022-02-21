@@ -17,7 +17,8 @@
 <body class="bg-img-roof">
   <div class="container-fluid transparency index-down position-fixed"></div>
 
-  <div id="winner-page" class="row d-flex align-items-center justify-content-center body-size">
+<!-- ===================================== WINNER PAGE ===================================== -->
+  <div id="winner-page" class="row d-none align-items-center justify-content-center body-size">
     <h2 id="text-winner" class="font-subtitle text-center"></h2>
     <div class="col-md-3 d-flex flex-column">
       <i class='bx bxs-crown bx-tada' id="crown"></i>
@@ -32,7 +33,9 @@
       </div>
     </div>
   </div>
-  <div id="home-page" class="row d-none flex-column align-items-center">
+
+<!-- ===================================== HOME PAGE ===================================== -->
+  <div id="home-page" class="row d-flex flex-column align-items-center">
 
 <!-- ===================================== TITLE ===================================== -->
     <div class="col-md-12 d-flex flex-column align-items-center">
@@ -48,23 +51,23 @@
 
 <!-- ===================================== CARD 1 ===================================== -->
         <div id="card-p1" class="card-size mx-5 my-2">
-          <img id="card-img-p1" class="card-photo position-relative position-photo" src="./assets/img/svg/teste-img.svg" alt="TESTE DE FOTO">
+          <img id="card-img-p1" class="card-photo position-relative position-photo" src="assets\img\svg\teste-img.svg" alt="TESTE DE FOTO">
           <div class="card-text position-relative position-text d-flex flex-column justify-content-around">
             <h3 id="name-p1" class="font-2 text-center text-uppercase">NOME DO GATO</h3>
             <div id="attr-section-p1" class="font-1 card-text-area text-uppercase d-flex flex-column justify-content-around">
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between attr-select">
                 <input type="radio" class="hidden" name="p1-attr" id="claw" value="claw" />
                 <label for="claw">tamanho da garra</label>
                 <span id="claw-p1">0</span>
               </div>
 
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between attr-select">
                 <input type="radio" class="hidden" name="p1-attr" id="meow" value="meow" />
                 <label for="meow">potência do miado</label>
                 <span id="meow-p1">0</span>
               </div>
 
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between attr-select">
                 <input type="radio" class="hidden" name="p1-attr" id="speed" value="speed" />
                 <label for="speed">velocidade de fuga</label>
                 <span id="speed-p1">0</span>
@@ -94,17 +97,17 @@
           <div class="card-text position-relative position-text d-flex flex-column justify-content-around">
             <h3 id="name-p2" class="font-2 text-center text-uppercase">NOME DO GATO</h3>
             <div id="attr-section-p2" class="font-1 card-text-area text-uppercase d-flex flex-column justify-content-around">
-              <div id="claw-field-p2" class="d-flex justify-content-between">
+              <div id="claw-field-p2" class="d-flex justify-content-between attr-select">
                 <input type="radio" class="hidden" name="p2-attr" id="claw-input-p2" value="claw" />
                 <label for="claw-input-p2">tamanho da garra</label>
                 <span id="claw-p2">0</span>
               </div>
-              <div id="meow-field-p2" class="d-flex justify-content-between">
+              <div id="meow-field-p2" class="d-flex justify-content-between attr-select">
                 <input type="radio" class="hidden" name="p2-attr" id="meow-input-p2" value="meow" />
                 <label for="meow-input-p2">potência do miado</label>
                 <span id="meow-p2">0</span>
               </div>
-              <div id="speed-field-p2" class="d-flex justify-content-between">
+              <div id="speed-field-p2" class="d-flex justify-content-between attr-select">
                 <input type="radio" class="hidden" name="p2-attr" id="speed-input-p2" value="speed" />
                 <label for="speed-input-p2">velocidade de fuga</label>
                 <span id="speed-p2">0</span>

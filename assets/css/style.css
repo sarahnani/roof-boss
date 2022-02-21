@@ -156,6 +156,11 @@ button:hover {
   top: 60px;
 }
 
+.attr-select:hover {
+  background-color: #f6cb09 !important;
+  padding: 0 5px;
+}
+
 @media screen and (max-width: 1600px) {
   .font-title {
     font-size: 11rem;
