@@ -315,14 +315,17 @@ function showCardsDistribution() {
   const deckFieldP1 = document.getElementById('deck-field-p1');
   const deckFieldP2 = document.getElementById('deck-field-p2');
   const pileField = document.getElementById('pile-field');
-
+  const pileFieldImg = document.getElementById('pile-field-img');
+  const pileContainer = document.getElementById('pile-container');
+  
   deckFieldP1.innerHTML = deckP1.length;
   deckFieldP2.innerHTML = deckP2.length;
   if (pile.length !== 0) {
-    pileField.innerHTML = `${pile.length}
-    <img id="pile-field-img" src="./assets/img/svg/messy-pile.svg" alt="uma pilha de cartas bagunçadas">`;
+    pileContainer.style.visibility = 'visible';
+    pileField.innerHTML = `${pile.length}`;
+    pileFieldImg.setAttribute('src', './assets/img/svg/messy-pile.svg');
   } else {
-    pileField.innerHTML = '';
+    pileContainer.style.visibility = 'hidden';
   }
   return true;
 }
@@ -352,7 +355,7 @@ function startCardOneAnimation() {
   setTimeout(() => {
     card1.style.animationName = "p1-wins-return";
     card1.style.animationPlayState = "paused";
-  }, 3000);
+  }, 1000);
   return true;
 }
 
@@ -365,7 +368,7 @@ function startCardTwoAnimation() {
   setTimeout(() => {
     card2.style.animationName = "p2-wins-return";
     card2.style.animationPlayState = "paused";
-  }, 3000);
+  }, 1000);
   return true;
 }
 
@@ -383,7 +386,7 @@ function startEvenCardsAnimation() {
     card1.style.animationPlayState = "paused";
     card2.style.animationName = "p2-wins-return";
     card2.style.animationPlayState = "paused";
-  }, 3000);
+  }, 1000);
   return true;
 }
 
@@ -394,7 +397,7 @@ function startEvenCardsToP1() {
   setTimeout(() => {
     card1.style.animationName = "p1-wins";
     card1.style.animationPlayState = "paused";
-  }, 3000)
+  }, 1000)
 }
 
 function startEvenCardsToP2() {
@@ -404,7 +407,7 @@ function startEvenCardsToP2() {
   setTimeout(() => {
     card2.style.animationName = "p2-wins";
     card2.style.animationPlayState = "paused";
-  }, 3000)
+  }, 1000)
 }
 
 // change display of game-play and winner player's page
@@ -414,6 +417,7 @@ function changeDisplayToHome() {
 
   home.setAttribute("class", "row d-flex flex-column align-items-center");
   winnerPage.setAttribute("class", "row d-none align-items-center justify-content-center body-size");
+  tagAudioGameplay();
   return true;
 }
 
@@ -426,6 +430,7 @@ function changeDisplayToWinnerPage(text) {
   home.setAttribute("class", "row d-none flex-column align-items-center");
   winnerPage.setAttribute("class", "row d-flex align-items-center justify-content-center body-size");
   textWinner.innerHTML = text;
+  tagAudioWinner();
   return true;
 }
 
@@ -446,6 +451,17 @@ function newGame() {
   hideAndShowCards();
   showCardsDistribution();
   return true;
+}
+
+// change music home and winners' page
+function tagAudioWinner() {
+  const audio = document.getElementById('vol-gameplay');
+  audio.setAttribute('src', './assets/audio/thug-life2.mp3');
+}
+
+function tagAudioGameplay() {
+  const audio = document.getElementById('vol-gameplay');
+  audio.setAttribute('src', './assets/audio/saltimbancos.mp3');
 }
 
 // ====================== literals & variables ======================
@@ -473,42 +489,42 @@ const homeBtn = document.getElementById('home-btn');
 // =========================== characters =========================== [BETA VERSION]
 //constructor(name, type, gender, size)
 
-deck.push(new Character('1', 1, 1, 1));
-deck.push(new Character('2', 0, 0, 0));
-deck.push(new Character('3', 0, 0, 1));
-deck.push(new Character('4', 1, 1, 0));
-// deck.push(new Character('5', 0, 0, 1));
-// deck.push(new Character('6', 0, 0, 0));
-// deck.push(new Character('7', 1, 1, 1));
-// deck.push(new Character('8', 0, 1, 0));
-// deck.push(new Character('9', 0, 1, 0));
-// deck.push(new Character('10', 0, 1, 0));
-// deck.push(new Character('11', 1, 1, 1));
-// deck.push(new Character('12', 0, 0, 0));
-// deck.push(new Character('13', 1, 0, 1));
-// deck.push(new Character('14', 0, 0, 0));
-// deck.push(new Character('15', 1, 0, 1));
-// deck.push(new Character('16', 1, 1, 0));
-// deck.push(new Character('17', 1, 0, 1));
-// deck.push(new Character('18', 0, 1, 1));
-// deck.push(new Character('19', 1, 0, 0));
-// deck.push(new Character('20', 0, 0, 1));
-// deck.push(new Character('21', 1, 0, 0));
-// deck.push(new Character('22', 0, 0, 1));
-// deck.push(new Character('23', 1, 1, 0));
-// deck.push(new Character('24', 1, 1, 0));
-// deck.push(new Character('25', 0, 1, 1));
-// deck.push(new Character('26', 0, 1, 0));
-// deck.push(new Character('27', 0, 1, 1));
-// deck.push(new Character('28', 0, 1, 1));
-// deck.push(new Character('29', 1, 0, 1));
-// deck.push(new Character('30', 1, 0, 0));
-// deck.push(new Character('31', 1, 1, 1));
-// deck.push(new Character('32', 1, 0, 1));
-// deck.push(new Character('33', 0, 0, 0));
-// deck.push(new Character('34', 1, 1, 1));
-// deck.push(new Character('35', 0, 1, 0));
-// deck.push(new Character('36', 1, 0, 0));
+deck.push(new Character('siam', 1, 1, 1));
+deck.push(new Character('feminha', 0, 0, 0));
+deck.push(new Character('piju', 0, 0, 1));
+deck.push(new Character('massinho', 1, 1, 0));
+deck.push(new Character('copelia', 0, 0, 1));
+deck.push(new Character('jamile', 0, 0, 0));
+deck.push(new Character('valtinho', 1, 1, 1));
+deck.push(new Character('django', 0, 1, 0));
+deck.push(new Character('fabinho', 0, 1, 0));
+deck.push(new Character('bartolomeu', 0, 1, 0));
+deck.push(new Character('bissinho', 1, 1, 1));
+deck.push(new Character('dora', 0, 0, 0));
+deck.push(new Character('belezinha', 1, 0, 1));
+deck.push(new Character('katrina', 0, 0, 0));
+deck.push(new Character('mizinha', 1, 0, 1));
+deck.push(new Character('figaro', 1, 1, 0));
+deck.push(new Character('duquesa', 1, 0, 1));
+deck.push(new Character('juanito', 0, 1, 1));
+deck.push(new Character('izma', 1, 0, 0));
+deck.push(new Character('dinah', 0, 0, 1));
+deck.push(new Character('felicia', 1, 0, 0));
+deck.push(new Character('alfa', 0, 0, 1));
+deck.push(new Character('dante', 1, 1, 0));
+deck.push(new Character('tibbs', 1, 1, 0));
+deck.push(new Character('louise', 0, 1, 1));
+deck.push(new Character('diablo', 0, 1, 0));
+deck.push(new Character('iago', 0, 1, 1));
+deck.push(new Character('baguera', 0, 1, 1));
+deck.push(new Character('amanda', 1, 0, 1));
+deck.push(new Character('judite', 1, 0, 0));
+deck.push(new Character('godofredo', 1, 1, 1));
+deck.push(new Character('minuc', 1, 0, 1));
+deck.push(new Character('purguinha', 0, 0, 0));
+deck.push(new Character('edgar', 1, 1, 1));
+deck.push(new Character('pink', 0, 1, 0));
+deck.push(new Character('mimi', 1, 0, 0));
 
 // ====================== execution ======================
 

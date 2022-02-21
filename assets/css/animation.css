@@ -5,7 +5,7 @@
   height: auto;
   bottom: 360px;
   left: 5px;
-  animation-duration: 3s;
+  animation-duration: 1.5s;
   animation-name: p1-wins;
   animation-play-state: paused;
   z-index: -1;
@@ -16,7 +16,7 @@
   height: auto;
   bottom: 360px;
   left: 5px;
-  animation-duration: 3s;
+  animation-duration: 1.5s;
   animation-name: p2-wins;
   animation-play-state: paused;
   z-index: -1;

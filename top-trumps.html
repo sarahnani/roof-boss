@@ -15,6 +15,7 @@
 </head>
 
 <body class="bg-img-roof">
+    
   <div class="container-fluid transparency index-down position-fixed"></div>
 
 <!-- ===================================== WINNER PAGE ===================================== -->
@@ -22,7 +23,7 @@
     <h2 id="text-winner" class="font-subtitle text-center"></h2>
     <div class="col-md-3 d-flex flex-column">
       <i class='bx bxs-crown bx-tada' id="crown"></i>
-      <img src="./assets/img/svg/teste-img.svg" alt="TESTE">
+      <img src="./assets/img/svg/teste-img.svg" alt="Foto do gato vencedor">
       <div class="d-flex justify-content-between">
         <button class="mt-3 py-3 px-5">
           <a href="./index.html"><i class='font-3 bx bxs-home-heart'></i></a>
@@ -85,8 +86,9 @@
             <img id="fight-btn" class="mx-5 paw-icon" src="./assets/img/svg/paw.svg" alt="ícone de pata">
           </div>
 
-          <div>
-            <span id="pile-field"><img id="pile-field-img" src="./assets/img/svg/minicard.svg" alt="TESTE" onclick="startEvenCardsAnimation()"></span> 
+          <div id="pile-container" class="d-flex flex-column align-items-center">
+            <span id="pile-field" class="position-relative font-2 font-weight-bold"></span>
+            <img id="pile-field-img" src="./assets/img/svg/minicard.svg" alt="uma pilha de cartas bagunçadas">
           </div>
         </div>
 
@@ -140,7 +142,11 @@
   </div>
 
   
-
+  <audio id="vol-gameplay" class="volume-change" src="./assets/audio/saltimbancos2.mp3" autoplay="autoplay" loop="loop"></audio>
+  <script>
+    const audioGame = document.getElementById('vol-gameplay');
+    audioGame.volume = 0.1;
+  </script>
 
   <script src="./assets/scripts/script.js"></script>
   <!-- import boostrap js with popper and jquery -->
