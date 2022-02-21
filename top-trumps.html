@@ -23,13 +23,13 @@
     <h2 id="text-winner" class="font-subtitle text-center"></h2>
     <div class="col-md-3 d-flex flex-column">
       <i class='bx bxs-crown bx-tada' id="crown"></i>
-      <img src="./assets/img/svg/teste-img.svg" alt="Foto do gato vencedor">
+      <img id="winner-img" src="./assets/img/svg/teste-img.svg" alt="Foto do gato vencedor">
       <div class="d-flex justify-content-between">
-        <button class="mt-3 py-3 px-5">
+        <button class="mt-3 py-3 px-5" id="home-btn">
           <a href="./index.html"><i class='font-3 bx bxs-home-heart'></i></a>
         </button>
-        <button class="mt-3 py-3 px-5">
-          <i class='font-3 bx bx-redo bx-rotate-180' onclick="changeDisplayToHome()"></i>
+        <button class="mt-3 py-3 px-5" onclick="changeDisplayToHome()">
+          <a href="./top-trumps.html"><i class='font-3 bx bx-redo bx-rotate-180'></i></a>
         </button>
       </div>
     </div>
@@ -117,7 +117,7 @@
 
             </div>
           </div>
-          <img class="position-relative img-fluid" id="hidden-card-2" src="./assets/img/svg/bg-card-back.svg" alt="TESTE">
+          <img class="position-relative img-fluid" id="hidden-card-2" src="./assets/img/svg/bg-card-back.svg">
         </div>
 
       </div>
