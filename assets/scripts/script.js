@@ -470,6 +470,19 @@ function tagAudioGameplay() {
   audio.setAttribute('src', './assets/audio/saltimbancos.mp3');
 }
 
+//function to change labels style on click event
+function changeStyle(index) {
+  labels.forEach((el, id) => {
+    if (id === index) {
+      el.style.backgroundColor = '#f6cb09';
+      el.style.border = '5px solid #f6b709';
+    } else {
+      el.style.backgroundColor = '#f6cb0900';
+      el.style.border = '0px';
+    }
+  });
+}
+
 // ====================== literals & variables ======================
 
 const deck = []; // array to store all game cards
@@ -492,6 +505,7 @@ const cardContentP2 = document.getElementById('card-content-p2');
 const cardImgP2 = document.getElementById('card-img-p2');
 const nameP2 = document.getElementById('name-p2');
 const attrSectionP2 = document.getElementById('attr-section-p2');
+const labels = document.querySelectorAll('.attr-select');
 
 // =========================== characters ===========================
 //constructor(name, type, gender, size)
@@ -537,4 +551,7 @@ deck.push(new Character('mimi', 1, 0, 0));
 
 fightBtn.addEventListener('click', showClaws);
 fightBtn.addEventListener('click', makeMove);
+labels.forEach((el, id) => {
+  el.setAttribute(`onclick`, `changeStyle(${id})`);
+});
 newGame();
