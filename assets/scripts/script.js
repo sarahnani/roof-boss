@@ -192,7 +192,6 @@ function doRoundActions(winner) {
       }
       break;
   }
-  console.log(`testou?`);
   lookForWinner();
   showCardsDistribution();
   p1turn = !p1turn;
