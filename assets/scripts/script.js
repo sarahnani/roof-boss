@@ -192,6 +192,7 @@ function doRoundActions(winner) {
       }
       break;
   }
+  console.log(`testou?`);
   lookForWinner();
   showCardsDistribution();
   p1turn = !p1turn;
@@ -262,24 +263,21 @@ function setBotAttr() {
 
 // hides and show elements depending on whose turn it is
 function hideAndShowCards() {
-  const hideImg = './assets/img/svg/bg-card-back.svg';
-  const showImg = './assets/img/svg/bg-card-front.svg';
-
   setTimeout(() => {
     if (p1turn) {
       //hide p2 card and show p1 card
-      cardP1.style.backgroundImage = `url(${showImg})`;
+      cardP1.style.backgroundImage = `url(${cardFaceURL})`;
       cardContentP1.style.visibility = 'visible';
       cardImgP1.style.visibility = 'visible';
-      cardP2.style.backgroundImage = `url(${hideImg})`;
+      cardP2.style.backgroundImage = `url(${cardBackURL})`;
       cardContentP2.style.visibility = 'hidden';
       cardImgP2.style.visibility = 'hidden';
       displayP1cards();
     } else {
-      cardP1.style.backgroundImage = `url(${hideImg})`;
+      cardP1.style.backgroundImage = `url(${cardBackURL})`;
       cardContentP1.style.visibility = 'hidden';
       cardImgP1.style.visibility = 'hidden';
-      cardP2.style.backgroundImage = `url(${showImg})`;
+      cardP2.style.backgroundImage = `url(${cardFaceURL})`;
       cardContentP2.style.visibility = 'visible';
       cardImgP2.style.visibility = 'visible';
       displayP2cards();
@@ -287,6 +285,15 @@ function hideAndShowCards() {
   }, 3000);
 
   return true;
+}
+
+function revealAttrComparison() {
+  cardP1.style.backgroundImage = `url(${cardFaceURL})`;
+  cardContentP1.style.visibility = 'visible';
+  cardImgP1.style.visibility = 'visible';
+  cardP2.style.backgroundImage = `url(${cardFaceURL})`;
+  cardContentP2.style.visibility = 'visible';
+  cardImgP2.style.visibility = 'visible';
 }
 
 // checks for winning condition and declares winner
@@ -483,6 +490,8 @@ const deckP2 = []; // player's set of cards
 const pile = []; // array to store cards when turn output is even
 let p1turn = true; // defines wether it's player 1 turn or not
 let checked; // stores checked value of attribute to be compared
+const cardBackURL = './assets/img/svg/bg-card-back.svg';
+const cardFaceURL = './assets/img/svg/bg-card-front.svg';
 
 // ========================== DOM elements ==========================
 
