@@ -117,16 +117,8 @@ function displayP2cards() {
 
 //gets p1 chosen attribute by select's name, compares with p2 attribute 
 function makeMove() {
-  if (p1turn) {
-    //checa os attr do p1
-    checked = document.querySelector(`input[name="p1-attr"]:checked`);
-    console.log(checked.value + ' do p1');
+  checked = document.querySelector(`input[name="attr-collection"]:checked`);
 
-  } else {
-    //checa os attr do p2
-    checked = document.querySelector(`input[name="p2-attr"]:checked`);
-    console.log(checked.value + ' do p2');
-  }
   switch (checked.value) {
     case 'claw':
       if (deckP1[0].claw > deckP2[0].claw) {
