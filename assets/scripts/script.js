@@ -121,7 +121,7 @@ function makeMove() {
     //checa os attr do p1
     checked = document.querySelector(`input[name="p1-attr"]:checked`);
     console.log(checked.value + ' do p1');
-    
+
   } else {
     //checa os attr do p2
     checked = document.querySelector(`input[name="p2-attr"]:checked`);
@@ -273,29 +273,27 @@ function hideAndShowCards() {
   const hideImg = './assets/img/svg/bg-card-back.svg';
   const showImg = './assets/img/svg/bg-card-front.svg';
 
-  if (p1turn) {
-    //hide p2 card and show p1 card
-    nameP1.style.visibility = 'visible';
-    attrSectionP1.style.visibility = 'visible';
-    cardImgP1.style.visibility = 'visible';
-    nameP2.style.visibility = 'hidden';
-    attrSectionP2.style.visibility = 'hidden';
-    cardImgP2.style.visibility = 'hidden';
-    cardP2.style.backgroundImage = `url(${hideImg})`;
-    cardP1.style.backgroundImage = `url(${showImg})`;
-    displayP1cards();
-  } else {
-    //hide p1 card and show p2 card
-    nameP1.style.visibility = 'hidden';
-    attrSectionP1.style.visibility = 'hidden';
-    cardImgP1.style.visibility = 'hidden';
-    nameP2.style.visibility = 'visible';
-    attrSectionP2.style.visibility = 'visible';
-    cardP1.style.backgroundImage = `url(${hideImg})`; //carta grande que contém os elementos
-    cardP2.style.backgroundImage = `url(${showImg})`;
-    cardImgP2.style.visibility = 'visible';
-    displayP2cards();
-  }
+  setTimeout(() => {
+    if (p1turn) {
+      //hide p2 card and show p1 card
+      cardP1.style.backgroundImage = `url(${showImg})`;
+      cardContentP1.style.visibility = 'visible';
+      cardImgP1.style.visibility = 'visible';
+      cardP2.style.backgroundImage = `url(${hideImg})`;
+      cardContentP2.style.visibility = 'hidden';
+      cardImgP2.style.visibility = 'hidden';
+      displayP1cards();
+    } else {
+      cardP1.style.backgroundImage = `url(${hideImg})`;
+      cardContentP1.style.visibility = 'hidden';
+      cardImgP1.style.visibility = 'hidden';
+      cardP2.style.backgroundImage = `url(${showImg})`;
+      cardContentP2.style.visibility = 'visible';
+      cardImgP2.style.visibility = 'visible';
+      displayP2cards();
+    }
+  }, 3000);
+
   return true;
 }
 
@@ -320,7 +318,7 @@ function showCardsDistribution() {
   const pileField = document.getElementById('pile-field');
   const pileFieldImg = document.getElementById('pile-field-img');
   const pileContainer = document.getElementById('pile-container');
-  
+
   deckFieldP1.innerHTML = deckP1.length;
   deckFieldP2.innerHTML = deckP2.length;
   if (pile.length !== 0) {
@@ -335,17 +333,17 @@ function showCardsDistribution() {
 
 // set paw button animation behavior
 function showClaws() {
-    const soundClaw = new Audio('/./assets/audio/claw2.mp3');
+  const soundClaw = new Audio('/./assets/audio/claw2.mp3');
 
-    fightBtn.setAttribute('src', './assets/img/svg/claw.svg');
-    soundClaw.volume = 0.4;
-    soundClaw.play();
-    setTimeout(() => {
-      new Audio('/./assets/audio/hissing2.mp3').play();
-    }, 200);
-    setTimeout(() => {
-      fightBtn.setAttribute('src', './assets/img/svg/paw.svg');
-    }, 1200);
+  fightBtn.setAttribute('src', './assets/img/svg/claw.svg');
+  soundClaw.volume = 0.4;
+  soundClaw.play();
+  setTimeout(() => {
+    new Audio('/./assets/audio/hissing2.mp3').play();
+  }, 200);
+  setTimeout(() => {
+    fightBtn.setAttribute('src', './assets/img/svg/paw.svg');
+  }, 1200);
   return true;
 }
 
@@ -440,7 +438,6 @@ function changeDisplayToWinnerPage(text) {
 }
 
 function clearArray(array) {
-  console.log(`limpei o ${array}`);
   for (let i = 0; i < array.length; i++) {
     array.pop();
   }
@@ -448,7 +445,6 @@ function clearArray(array) {
 }
 
 function newGame() {
-  console.log('novo jogo bro');
   clearArray(deckP1);
   clearArray(deckP2);
   clearArray(pile);
@@ -487,10 +483,12 @@ let checked; // stores checked value of attribute to be compared
 
 const fightBtn = document.getElementById('fight-btn');
 const cardP1 = document.getElementById('card-p1');
+const cardContentP1 = document.getElementById('card-content-p1');
 const cardImgP1 = document.getElementById('card-img-p1');
 const nameP1 = document.getElementById('name-p1');
 const attrSectionP1 = document.getElementById('attr-section-p1');
 const cardP2 = document.getElementById('card-p2');
+const cardContentP2 = document.getElementById('card-content-p2');
 const cardImgP2 = document.getElementById('card-img-p2');
 const nameP2 = document.getElementById('name-p2');
 const attrSectionP2 = document.getElementById('attr-section-p2');

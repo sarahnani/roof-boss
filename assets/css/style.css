@@ -103,17 +103,20 @@ button:hover {
   border: 3px solid #70574E;
   background-image: url("../img/svg/bg-card-front.svg");
   background-size: cover;
+  z-index: 1031;
 }
 
 .card-photo {
   width: 200px;
   height: 200px;
   border-radius: 3px;
+  visibility: hidden;
 }
 
 .card-text {
   width: 200px;
   height: 200px;
+  visibility: hidden;
 }
 
 .card-text-area {
