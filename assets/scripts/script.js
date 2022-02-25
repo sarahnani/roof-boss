@@ -298,14 +298,12 @@ function revealAttrComparison() {
 // checks for winning condition and declares winner
 function lookForWinner() {
   const winnerImg = document.getElementById('winner-img');
-  if (deckP1.length === 0 || deckP2.length === 0 && pile.length === 0) {
-    if (p1turn) {
-      changeDisplayToWinnerPage("Jogador 2 venceu!");
-      winnerImg.setAttribute('src', deckP2[deckP2.length - 1].img);
-    } else {
-      changeDisplayToWinnerPage("Jogador 1 venceu!");
-      winnerImg.setAttribute('src', deckP1[deckP1.length - 1].img);
-    }
+  if (deckP1.length === 0) {
+    changeDisplayToWinnerPage('Jogador 1 venceu!');
+    winnerImg.setAttribute('src', deckP1[deckP1.length - 1].img);
+  } else if (deckP2.length === 0) {
+    changeDisplayToWinnerPage('Jogador 2 venceu!');
+    winnerImg.setAttribute('src', deckP2[deckP2.length - 1].img);
   }
   return true;
 }
@@ -419,6 +417,7 @@ function changeDisplayToHome() {
   home.setAttribute("class", "row d-flex flex-column align-items-center");
   winnerPage.setAttribute("class", "row d-none align-items-center justify-content-center body-size");
   tagAudioGameplay();
+  newGame();
   return true;
 }
 
@@ -514,38 +513,38 @@ deck.push(new Character('copelia', 0, 0, 1));
 deck.push(new Character('katrina', 0, 0, 0));
 deck.push(new Character('fabinho', 0, 1, 0));
 deck.push(new Character('juanito', 0, 1, 1));
-deck.push(new Character('siam', 1, 1, 1));
-deck.push(new Character('feminha', 0, 0, 0));
-deck.push(new Character('piju', 0, 0, 1));
-deck.push(new Character('massinho', 1, 1, 0));
-deck.push(new Character('jamile', 0, 0, 0));
-deck.push(new Character('valtinho', 1, 1, 1));
-deck.push(new Character('django', 0, 1, 0));
-deck.push(new Character('bartolomeu', 0, 1, 0));
-deck.push(new Character('bissinho', 1, 1, 1));
-deck.push(new Character('dora', 0, 0, 0));
-deck.push(new Character('belezinha', 1, 0, 1));
-deck.push(new Character('mizinha', 1, 0, 1));
-deck.push(new Character('figaro', 1, 1, 0));
-deck.push(new Character('duquesa', 1, 0, 1));
-deck.push(new Character('izma', 1, 0, 0));
-deck.push(new Character('dinah', 0, 0, 1));
-deck.push(new Character('felicia', 1, 0, 0));
-deck.push(new Character('alfa', 0, 0, 1));
-deck.push(new Character('dante', 1, 1, 0));
-deck.push(new Character('tibbs', 1, 1, 0));
-deck.push(new Character('louise', 0, 1, 1));
-deck.push(new Character('diablo', 0, 1, 0));
-deck.push(new Character('iago', 0, 1, 1));
-deck.push(new Character('baguera', 0, 1, 1));
-deck.push(new Character('amanda', 1, 0, 1));
-deck.push(new Character('judite', 1, 0, 0));
-deck.push(new Character('godofredo', 1, 1, 1));
-deck.push(new Character('minuc', 1, 0, 1));
-deck.push(new Character('purguinha', 0, 0, 0));
-deck.push(new Character('edgar', 1, 1, 1));
-deck.push(new Character('pink', 0, 1, 0));
-deck.push(new Character('mimi', 1, 0, 0));
+// deck.push(new Character('siam', 1, 1, 1));
+// deck.push(new Character('feminha', 0, 0, 0));
+// deck.push(new Character('piju', 0, 0, 1));
+// deck.push(new Character('massinho', 1, 1, 0));
+// deck.push(new Character('jamile', 0, 0, 0));
+// deck.push(new Character('valtinho', 1, 1, 1));
+// deck.push(new Character('django', 0, 1, 0));
+// deck.push(new Character('bartolomeu', 0, 1, 0));
+// deck.push(new Character('bissinho', 1, 1, 1));
+// deck.push(new Character('dora', 0, 0, 0));
+// deck.push(new Character('belezinha', 1, 0, 1));
+// deck.push(new Character('mizinha', 1, 0, 1));
+// deck.push(new Character('figaro', 1, 1, 0));
+// deck.push(new Character('duquesa', 1, 0, 1));
+// deck.push(new Character('izma', 1, 0, 0));
+// deck.push(new Character('dinah', 0, 0, 1));
+// deck.push(new Character('felicia', 1, 0, 0));
+// deck.push(new Character('alfa', 0, 0, 1));
+// deck.push(new Character('dante', 1, 1, 0));
+// deck.push(new Character('tibbs', 1, 1, 0));
+// deck.push(new Character('louise', 0, 1, 1));
+// deck.push(new Character('diablo', 0, 1, 0));
+// deck.push(new Character('iago', 0, 1, 1));
+// deck.push(new Character('baguera', 0, 1, 1));
+// deck.push(new Character('amanda', 1, 0, 1));
+// deck.push(new Character('judite', 1, 0, 0));
+// deck.push(new Character('godofredo', 1, 1, 1));
+// deck.push(new Character('minuc', 1, 0, 1));
+// deck.push(new Character('purguinha', 0, 0, 0));
+// deck.push(new Character('edgar', 1, 1, 1));
+// deck.push(new Character('pink', 0, 1, 0));
+// deck.push(new Character('mimi', 1, 0, 0));
 
 // ====================== execution ======================
 
