@@ -13,12 +13,13 @@
 </head>
 
 <body class="bg-img-roof">
-  <audio id="vol-home" src="./assets/audio/saltimbancos.mp3" autoplay="autoplay" loop="loop"></audio>
+  <!-- <audio id="vol-home" src="./assets/audio/saltimbancos.mp3" autoplay="autoplay" loop="loop"></audio> -->
   <script>
-    const audioHome = document.getElementById('vol-home');
-    audioHome.volume = 0.1;
+    const soundtrack = new Audio('assets/audio/saltimbancos2.mp3');
+    soundtrack.volume = 0.2;
+    soundtrack.play();
   </script>
-  
+
   <div class="container-fluid transparency index-down position-fixed"></div>
 
   <div class="container-fluid d-flex flex-column align-items-center">
@@ -27,7 +28,10 @@
         <h1 class="font-title">ROOF BOSS</h1>
 
         <div class="typewriter">
-          <p class="m-5 font-3 font-weight-bold color-white text-left" id="text">Em algum telhado, uma impressionante disputa por território acontece. Você já ouviu uma dessas! Mas não tinha ideia do que estava em jogo... Será que você pode vencer esta briga pelo título de Chefe do Telhado? Escolha seus melhores atributos e descubra! </p>
+          <p class="m-5 font-3 font-weight-bold color-white text-left" id="text">Em algum telhado, uma impressionante
+            disputa por território acontece. Você já ouviu uma dessas! Mas não tinha ideia do que estava em jogo... Será
+            que você pode vencer esta briga pelo título de Chefe do Telhado? Escolha seus melhores atributos e descubra!
+          </p>
 
           <div class="position-fixed fixed-bottom">
             <a href="top-trumps.html">
