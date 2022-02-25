@@ -5,7 +5,7 @@ class Character {
     this.type = type // 1 street cat, 0 house cat
     this.gender = gender // 1 male, 0 female
     this.weight = size // 1 thin, 0 fat
-    this.img = `/./assets/img/cats/${name}.png`
+    this.img = `./assets/img/cats/${name}.png`
     this.claw = 0
     this.meow = 0
     this.speed = 0
@@ -337,7 +337,7 @@ function showClaws() {
   const soundClaw = new Audio('/./assets/audio/claw2.mp3');
 
   fightBtn.setAttribute('src', './assets/img/svg/claw.svg');
-  soundClaw.volume = 0.4;
+  soundClaw.volume = 0.25;
   soundClaw.play();
   setTimeout(() => {
     new Audio('/./assets/audio/hissing2.mp3').play();
@@ -550,6 +550,9 @@ deck.push(new Character('juanito', 0, 1, 1));
 // deck.push(new Character('mimi', 1, 0, 0));
 
 // ====================== execution ======================
+const soundtrack = new Audio('./assets/audio/saltimbancos2.mp3');
+  soundtrack.volume = 0.1;
+  soundtrack.play();
 fightBtn.addEventListener('click', showClaws);
 fightBtn.addEventListener('click', makeMove);
 labels.forEach((el, id) => {
