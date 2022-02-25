@@ -56,7 +56,7 @@ button:hover {
 
 .font-subtitle {
   text-align: center;
-  font-size: 9rem;
+  font-size: 7rem !important;
   font-weight: 900;
   letter-spacing: 0.1em;
   filter: blur(4px);
@@ -76,7 +76,7 @@ button:hover {
 }
 
 .font-3 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-shadow: 3px 2px 4px #FFFFFF;
 }
 
@@ -103,17 +103,20 @@ button:hover {
   border: 3px solid #70574E;
   background-image: url("../img/svg/bg-card-front.svg");
   background-size: cover;
+  z-index: 1031;
 }
 
 .card-photo {
   width: 200px;
   height: 200px;
   border-radius: 3px;
+  visibility: hidden;
 }
 
 .card-text {
   width: 200px;
   height: 200px;
+  visibility: hidden;
 }
 
 .card-text-area {
@@ -156,7 +159,13 @@ button:hover {
   top: 60px;
 }
 
-.attr-select:hover, label:hover {
+.attr-select {
+  font-size: 10pt;
+  padding: 0 5px;
+  border: 5px solid #f6b70900;
+}
+
+.attr-select:hover {
   cursor: pointer;
   background-color: #f6cb09 !important;
   padding: 0 5px;
@@ -237,4 +246,8 @@ button:hover {
   .font-4 {
     font-size: 3rem;
   }
+}
+
+#fight-btn:hover {
+  cursor: pointer;
 }

@@ -117,54 +117,53 @@ function displayP2cards() {
 
 //gets p1 chosen attribute by select's name, compares with p2 attribute 
 function makeMove() {
-  if (p1turn) {
-    //checa os attr do p1
-    checked = document.querySelector(`input[name="p1-attr"]:checked`);
-    console.log(checked.value + ' do p1');
-    
-  } else {
-    //checa os attr do p2
-    checked = document.querySelector(`input[name="p2-attr"]:checked`);
-    console.log(checked.value + ' do p2');
-  }
-  switch (checked.value) {
-    case 'claw':
-      if (deckP1[0].claw > deckP2[0].claw) {
-        console.log(`${deckP1[0].claw} > ${deckP2[0].claw} P1`);
-        doRoundActions(1);
-      } else if (deckP2[0].claw > deckP1[0].claw) {
-        console.log(`${deckP2[0].claw} > ${deckP1[0].claw} P2`);
-        doRoundActions(2);
-      } else {
-        console.log(`${deckP2[0].claw} = ${deckP1[0].claw} EVEN`);
-        doRoundActions(0);
-      }
-      break;
-    case 'meow':
-      if (deckP1[0].meow > deckP2[0].meow) {
-        console.log(`${deckP1[0].meow} > ${deckP2[0].meow} P1`);
-        doRoundActions(1);
-      } else if (deckP2[0].meow > deckP1[0].meow) {
-        console.log(`${deckP2[0].meow} > ${deckP1[0].meow} P2`);
-        doRoundActions(2);
-      } else {
-        console.log(`${deckP2[0].meow} = ${deckP1[0].meow} EVEN`);
-        doRoundActions(0);
-      }
-      break;
-    case 'speed':
-      if (deckP1[0].speed > deckP2[0].speed) {
-        console.log(`${deckP1[0].speed} > ${deckP2[0].speed} P1`);
-        doRoundActions(1);
-      } else if (deckP2[0].speed > deckP1[0].speed) {
-        console.log(`${deckP2[0].speed} > ${deckP1[0].speed} P2`);
-        doRoundActions(2);
-      } else {
-        console.log(`${deckP2[0].speed} = ${deckP1[0].speed} EVEN`);
-        doRoundActions(0);
-      }
-      break;
-  }
+  checked = document.querySelector(`input[name="attr-collection"]:checked`);
+
+  revealAttrComparison();
+
+  setTimeout(() => {
+    switch (checked.value) {
+      case 'claw':
+        console.log(checked.value);
+        if (deckP1[0].claw > deckP2[0].claw) {
+          console.log(`${deckP1[0].claw} > ${deckP2[0].claw} P1`);
+          doRoundActions(1);
+        } else if (deckP2[0].claw > deckP1[0].claw) {
+          console.log(`${deckP2[0].claw} > ${deckP1[0].claw} P2`);
+          doRoundActions(2);
+        } else {
+          console.log(`${deckP2[0].claw} = ${deckP1[0].claw} EVEN`);
+          doRoundActions(0);
+        }
+        break;
+      case 'meow':
+        console.log(checked.value);
+        if (deckP1[0].meow > deckP2[0].meow) {
+          console.log(`${deckP1[0].meow} > ${deckP2[0].meow} P1`);
+          doRoundActions(1);
+        } else if (deckP2[0].meow > deckP1[0].meow) {
+          console.log(`${deckP2[0].meow} > ${deckP1[0].meow} P2`);
+          doRoundActions(2);
+        } else {
+          console.log(`${deckP2[0].meow} = ${deckP1[0].meow} EVEN`);
+          doRoundActions(0);
+        }
+        break;
+      case 'speed':
+        console.log(checked.value);
+        if (deckP1[0].speed > deckP2[0].speed) {
+          console.log(`${deckP1[0].speed} > ${deckP2[0].speed} P1`);
+          doRoundActions(1);
+        } else if (deckP2[0].speed > deckP1[0].speed) {
+          console.log(`${deckP2[0].speed} > ${deckP1[0].speed} P2`);
+          doRoundActions(2);
+        } else {
+          console.log(`${deckP2[0].speed} = ${deckP1[0].speed} EVEN`);
+          doRoundActions(0);
+        }
+        break;
+    }
+  }, 1500);
   return true;
 }
 
@@ -210,7 +209,6 @@ function doRoundActions(winner) {
 // pushes first element of an array to another one 
 function moveCard(fromArr, toArr) {
   const movedCard = fromArr.splice(0, 1);
-
   toArr.push(movedCard[0]);
   return true;
 }
@@ -218,7 +216,6 @@ function moveCard(fromArr, toArr) {
 // sends current card to the end of array too
 function sendCardToBottom(arr) {
   const movedCard = arr.splice(0, 1);
-
   arr.push(movedCard[0]);
   return true;
 }
@@ -270,46 +267,48 @@ function setBotAttr() {
 
 // hides and show elements depending on whose turn it is
 function hideAndShowCards() {
-  const hideImg = './assets/img/svg/bg-card-back.svg';
-  const showImg = './assets/img/svg/bg-card-front.svg';
+  setTimeout(() => {
+    if (p1turn) {
+      //hide p2 card and show p1 card
+      cardP1.style.backgroundImage = `url(${cardFaceURL})`;
+      cardContentP1.style.visibility = 'visible';
+      cardImgP1.style.visibility = 'visible';
+      cardP2.style.backgroundImage = `url(${cardBackURL})`;
+      cardContentP2.style.visibility = 'hidden';
+      cardImgP2.style.visibility = 'hidden';
+      displayP1cards();
+    } else {
+      cardP1.style.backgroundImage = `url(${cardBackURL})`;
+      cardContentP1.style.visibility = 'hidden';
+      cardImgP1.style.visibility = 'hidden';
+      cardP2.style.backgroundImage = `url(${cardFaceURL})`;
+      cardContentP2.style.visibility = 'visible';
+      cardImgP2.style.visibility = 'visible';
+      displayP2cards();
+    }
+  }, 3000);
+  return true;
+}
 
-  if (p1turn) {
-    //hide p2 card and show p1 card
-    nameP1.style.visibility = 'visible';
-    attrSectionP1.style.visibility = 'visible';
-    cardImgP1.style.visibility = 'visible';
-    nameP2.style.visibility = 'hidden';
-    attrSectionP2.style.visibility = 'hidden';
-    cardImgP2.style.visibility = 'hidden';
-    cardP2.style.backgroundImage = `url(${hideImg})`;
-    cardP1.style.backgroundImage = `url(${showImg})`;
-    displayP1cards();
-  } else {
-    //hide p1 card and show p2 card
-    nameP1.style.visibility = 'hidden';
-    attrSectionP1.style.visibility = 'hidden';
-    cardImgP1.style.visibility = 'hidden';
-    nameP2.style.visibility = 'visible';
-    attrSectionP2.style.visibility = 'visible';
-    cardP1.style.backgroundImage = `url(${hideImg})`; //carta grande que contém os elementos
-    cardP2.style.backgroundImage = `url(${showImg})`;
-    cardImgP2.style.visibility = 'visible';
-    displayP2cards();
-  }
+function revealAttrComparison() {
+  cardP1.style.backgroundImage = `url(${cardFaceURL})`;
+  cardContentP1.style.visibility = 'visible';
+  cardImgP1.style.visibility = 'visible';
+  cardP2.style.backgroundImage = `url(${cardFaceURL})`;
+  cardContentP2.style.visibility = 'visible';
+  cardImgP2.style.visibility = 'visible';
   return true;
 }
 
 // checks for winning condition and declares winner
 function lookForWinner() {
   const winnerImg = document.getElementById('winner-img');
-  if (deckP1.length === 0 || deckP2.length === 0 && pile.length === 0) {
-    if (p1turn) {
-      changeDisplayToWinnerPage("Jogador 2 venceu!");
-      winnerImg.setAttribute('src', deckP2[deckP2.length - 1].img);
-    } else {
-      changeDisplayToWinnerPage("Jogador 1 venceu!");
-      winnerImg.setAttribute('src', deckP1[deckP1.length - 1].img);
-    }
+  if (deckP1.length === 0) {
+    changeDisplayToWinnerPage('Jogador 2 venceu!');
+    winnerImg.setAttribute('src', (deckP2[deckP2.length - 1].img));
+  } else if (deckP2.length === 0) {
+    changeDisplayToWinnerPage('Jogador 1 venceu!');
+    winnerImg.setAttribute('src', (deckP1[deckP1.length - 1].img));
   }
   return true;
 }
@@ -320,7 +319,7 @@ function showCardsDistribution() {
   const pileField = document.getElementById('pile-field');
   const pileFieldImg = document.getElementById('pile-field-img');
   const pileContainer = document.getElementById('pile-container');
-  
+
   deckFieldP1.innerHTML = deckP1.length;
   deckFieldP2.innerHTML = deckP2.length;
   if (pile.length !== 0) {
@@ -335,17 +334,17 @@ function showCardsDistribution() {
 
 // set paw button animation behavior
 function showClaws() {
-    const soundClaw = new Audio('/./assets/audio/claw2.mp3');
+  const soundClaw = new Audio('/./assets/audio/claw2.mp3');
 
-    fightBtn.setAttribute('src', './assets/img/svg/claw.svg');
-    soundClaw.volume = 0.4;
-    soundClaw.play();
-    setTimeout(() => {
-      new Audio('/./assets/audio/hissing2.mp3').play();
-    }, 200);
-    setTimeout(() => {
-      fightBtn.setAttribute('src', './assets/img/svg/paw.svg');
-    }, 1200);
+  fightBtn.setAttribute('src', './assets/img/svg/claw.svg');
+  soundClaw.volume = 0.4;
+  soundClaw.play();
+  setTimeout(() => {
+    new Audio('/./assets/audio/hissing2.mp3').play();
+  }, 200);
+  setTimeout(() => {
+    fightBtn.setAttribute('src', './assets/img/svg/paw.svg');
+  }, 1200);
   return true;
 }
 
@@ -423,6 +422,7 @@ function changeDisplayToHome() {
   home.setAttribute("class", "row d-flex flex-column align-items-center");
   winnerPage.setAttribute("class", "row d-none align-items-center justify-content-center body-size");
   tagAudioGameplay();
+  newGame();
   return true;
 }
 
@@ -435,12 +435,15 @@ function changeDisplayToWinnerPage(text) {
   home.setAttribute("class", "row d-none flex-column align-items-center");
   winnerPage.setAttribute("class", "row d-flex align-items-center justify-content-center body-size");
   textWinner.innerHTML = text;
-  tagAudioWinner();
+  const audio = document.getElementById('vol-gameplay');
+  audio.setAttribute('src', '');
+  const winnerSong = new Audio('./assets/audio/thug-life2.mp3');
+  winnerSong.volume = 0.4;
+  winnerSong.play();
   return true;
 }
 
 function clearArray(array) {
-  console.log(`limpei o ${array}`);
   for (let i = 0; i < array.length; i++) {
     array.pop();
   }
@@ -448,7 +451,6 @@ function clearArray(array) {
 }
 
 function newGame() {
-  console.log('novo jogo bro');
   clearArray(deckP1);
   clearArray(deckP2);
   clearArray(pile);
@@ -463,15 +465,22 @@ function newGame() {
   return true;
 }
 
-// change music home and winners' page
-function tagAudioWinner() {
-  const audio = document.getElementById('vol-gameplay');
-  audio.setAttribute('src', './assets/audio/thug-life2.mp3');
-}
-
 function tagAudioGameplay() {
   const audio = document.getElementById('vol-gameplay');
   audio.setAttribute('src', './assets/audio/saltimbancos.mp3');
+}
+
+//function to change labels style on click event
+function changeStyle(index) {
+  labels.forEach((el, id) => {
+    if (id === index || id === index + 3 || id === index - 3) {
+      el.style.backgroundColor = '#f6cb09';
+      el.style.border = '5px solid #f6b709';
+    } else {
+      el.style.backgroundColor = '#f6cb0900';
+      el.style.border = '0px';
+    }
+  });
 }
 
 // ====================== literals & variables ======================
@@ -482,18 +491,23 @@ const deckP2 = []; // player's set of cards
 const pile = []; // array to store cards when turn output is even
 let p1turn = true; // defines wether it's player 1 turn or not
 let checked; // stores checked value of attribute to be compared
+const cardBackURL = './assets/img/svg/bg-card-back.svg';
+const cardFaceURL = './assets/img/svg/bg-card-front.svg';
 
 // ========================== DOM elements ==========================
 
 const fightBtn = document.getElementById('fight-btn');
 const cardP1 = document.getElementById('card-p1');
+const cardContentP1 = document.getElementById('card-content-p1');
 const cardImgP1 = document.getElementById('card-img-p1');
 const nameP1 = document.getElementById('name-p1');
 const attrSectionP1 = document.getElementById('attr-section-p1');
 const cardP2 = document.getElementById('card-p2');
+const cardContentP2 = document.getElementById('card-content-p2');
 const cardImgP2 = document.getElementById('card-img-p2');
 const nameP2 = document.getElementById('name-p2');
 const attrSectionP2 = document.getElementById('attr-section-p2');
+const labels = document.querySelectorAll('.attr-select');
 
 // =========================== characters ===========================
 //constructor(name, type, gender, size)
@@ -502,41 +516,44 @@ deck.push(new Character('copelia', 0, 0, 1));
 deck.push(new Character('katrina', 0, 0, 0));
 deck.push(new Character('fabinho', 0, 1, 0));
 deck.push(new Character('juanito', 0, 1, 1));
-deck.push(new Character('siam', 1, 1, 1));
-deck.push(new Character('feminha', 0, 0, 0));
-deck.push(new Character('piju', 0, 0, 1));
-deck.push(new Character('massinho', 1, 1, 0));
-deck.push(new Character('jamile', 0, 0, 0));
-deck.push(new Character('valtinho', 1, 1, 1));
-deck.push(new Character('django', 0, 1, 0));
-deck.push(new Character('bartolomeu', 0, 1, 0));
-deck.push(new Character('bissinho', 1, 1, 1));
-deck.push(new Character('dora', 0, 0, 0));
-deck.push(new Character('belezinha', 1, 0, 1));
-deck.push(new Character('mizinha', 1, 0, 1));
-deck.push(new Character('figaro', 1, 1, 0));
-deck.push(new Character('duquesa', 1, 0, 1));
-deck.push(new Character('izma', 1, 0, 0));
-deck.push(new Character('dinah', 0, 0, 1));
-deck.push(new Character('felicia', 1, 0, 0));
-deck.push(new Character('alfa', 0, 0, 1));
-deck.push(new Character('dante', 1, 1, 0));
-deck.push(new Character('tibbs', 1, 1, 0));
-deck.push(new Character('louise', 0, 1, 1));
-deck.push(new Character('diablo', 0, 1, 0));
-deck.push(new Character('iago', 0, 1, 1));
-deck.push(new Character('baguera', 0, 1, 1));
-deck.push(new Character('amanda', 1, 0, 1));
-deck.push(new Character('judite', 1, 0, 0));
-deck.push(new Character('godofredo', 1, 1, 1));
-deck.push(new Character('minuc', 1, 0, 1));
-deck.push(new Character('purguinha', 0, 0, 0));
-deck.push(new Character('edgar', 1, 1, 1));
-deck.push(new Character('pink', 0, 1, 0));
-deck.push(new Character('mimi', 1, 0, 0));
+// deck.push(new Character('siam', 1, 1, 1));
+// deck.push(new Character('feminha', 0, 0, 0));
+// deck.push(new Character('piju', 0, 0, 1));
+// deck.push(new Character('massinho', 1, 1, 0));
+// deck.push(new Character('jamile', 0, 0, 0));
+// deck.push(new Character('valtinho', 1, 1, 1));
+// deck.push(new Character('django', 0, 1, 0));
+// deck.push(new Character('bartolomeu', 0, 1, 0));
+// deck.push(new Character('bissinho', 1, 1, 1));
+// deck.push(new Character('dora', 0, 0, 0));
+// deck.push(new Character('belezinha', 1, 0, 1));
+// deck.push(new Character('mizinha', 1, 0, 1));
+// deck.push(new Character('figaro', 1, 1, 0));
+// deck.push(new Character('duquesa', 1, 0, 1));
+// deck.push(new Character('izma', 1, 0, 0));
+// deck.push(new Character('dinah', 0, 0, 1));
+// deck.push(new Character('felicia', 1, 0, 0));
+// deck.push(new Character('alfa', 0, 0, 1));
+// deck.push(new Character('dante', 1, 1, 0));
+// deck.push(new Character('tibbs', 1, 1, 0));
+// deck.push(new Character('louise', 0, 1, 1));
+// deck.push(new Character('diablo', 0, 1, 0));
+// deck.push(new Character('iago', 0, 1, 1));
+// deck.push(new Character('baguera', 0, 1, 1));
+// deck.push(new Character('amanda', 1, 0, 1));
+// deck.push(new Character('judite', 1, 0, 0));
+// deck.push(new Character('godofredo', 1, 1, 1));
+// deck.push(new Character('minuc', 1, 0, 1));
+// deck.push(new Character('purguinha', 0, 0, 0));
+// deck.push(new Character('edgar', 1, 1, 1));
+// deck.push(new Character('pink', 0, 1, 0));
+// deck.push(new Character('mimi', 1, 0, 0));
 
 // ====================== execution ======================
-
 fightBtn.addEventListener('click', showClaws);
 fightBtn.addEventListener('click', makeMove);
+labels.forEach((el, id) => {
+  el.setAttribute(`onclick`, `changeStyle(${id})`);
+});
+
 newGame();
