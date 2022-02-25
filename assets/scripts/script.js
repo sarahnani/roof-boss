@@ -119,44 +119,51 @@ function displayP2cards() {
 function makeMove() {
   checked = document.querySelector(`input[name="attr-collection"]:checked`);
 
-  switch (checked.value) {
-    case 'claw':
-      if (deckP1[0].claw > deckP2[0].claw) {
-        console.log(`${deckP1[0].claw} > ${deckP2[0].claw} P1`);
-        doRoundActions(1);
-      } else if (deckP2[0].claw > deckP1[0].claw) {
-        console.log(`${deckP2[0].claw} > ${deckP1[0].claw} P2`);
-        doRoundActions(2);
-      } else {
-        console.log(`${deckP2[0].claw} = ${deckP1[0].claw} EVEN`);
-        doRoundActions(0);
-      }
-      break;
-    case 'meow':
-      if (deckP1[0].meow > deckP2[0].meow) {
-        console.log(`${deckP1[0].meow} > ${deckP2[0].meow} P1`);
-        doRoundActions(1);
-      } else if (deckP2[0].meow > deckP1[0].meow) {
-        console.log(`${deckP2[0].meow} > ${deckP1[0].meow} P2`);
-        doRoundActions(2);
-      } else {
-        console.log(`${deckP2[0].meow} = ${deckP1[0].meow} EVEN`);
-        doRoundActions(0);
-      }
-      break;
-    case 'speed':
-      if (deckP1[0].speed > deckP2[0].speed) {
-        console.log(`${deckP1[0].speed} > ${deckP2[0].speed} P1`);
-        doRoundActions(1);
-      } else if (deckP2[0].speed > deckP1[0].speed) {
-        console.log(`${deckP2[0].speed} > ${deckP1[0].speed} P2`);
-        doRoundActions(2);
-      } else {
-        console.log(`${deckP2[0].speed} = ${deckP1[0].speed} EVEN`);
-        doRoundActions(0);
-      }
-      break;
-  }
+  revealAttrComparison();
+
+  setTimeout(() => {
+    switch (checked.value) {
+      case 'claw':
+        console.log(checked.value);
+        if (deckP1[0].claw > deckP2[0].claw) {
+          console.log(`${deckP1[0].claw} > ${deckP2[0].claw} P1`);
+          doRoundActions(1);
+        } else if (deckP2[0].claw > deckP1[0].claw) {
+          console.log(`${deckP2[0].claw} > ${deckP1[0].claw} P2`);
+          doRoundActions(2);
+        } else {
+          console.log(`${deckP2[0].claw} = ${deckP1[0].claw} EVEN`);
+          doRoundActions(0);
+        }
+        break;
+      case 'meow':
+        console.log(checked.value);
+        if (deckP1[0].meow > deckP2[0].meow) {
+          console.log(`${deckP1[0].meow} > ${deckP2[0].meow} P1`);
+          doRoundActions(1);
+        } else if (deckP2[0].meow > deckP1[0].meow) {
+          console.log(`${deckP2[0].meow} > ${deckP1[0].meow} P2`);
+          doRoundActions(2);
+        } else {
+          console.log(`${deckP2[0].meow} = ${deckP1[0].meow} EVEN`);
+          doRoundActions(0);
+        }
+        break;
+      case 'speed':
+        console.log(checked.value);
+        if (deckP1[0].speed > deckP2[0].speed) {
+          console.log(`${deckP1[0].speed} > ${deckP2[0].speed} P1`);
+          doRoundActions(1);
+        } else if (deckP2[0].speed > deckP1[0].speed) {
+          console.log(`${deckP2[0].speed} > ${deckP1[0].speed} P2`);
+          doRoundActions(2);
+        } else {
+          console.log(`${deckP2[0].speed} = ${deckP1[0].speed} EVEN`);
+          doRoundActions(0);
+        }
+        break;
+    }
+  }, 1500);
   return true;
 }
 
@@ -282,7 +289,6 @@ function hideAndShowCards() {
       displayP2cards();
     }
   }, 3000);
-
   return true;
 }
 
@@ -293,6 +299,7 @@ function revealAttrComparison() {
   cardP2.style.backgroundImage = `url(${cardFaceURL})`;
   cardContentP2.style.visibility = 'visible';
   cardImgP2.style.visibility = 'visible';
+  return true;
 }
 
 // checks for winning condition and declares winner
@@ -470,7 +477,7 @@ function tagAudioGameplay() {
 //function to change labels style on click event
 function changeStyle(index) {
   labels.forEach((el, id) => {
-    if (id === index) {
+    if (id === index || id === index + 3) {
       el.style.backgroundColor = '#f6cb09';
       el.style.border = '5px solid #f6b709';
     } else {
@@ -547,7 +554,6 @@ deck.push(new Character('juanito', 0, 1, 1));
 // deck.push(new Character('mimi', 1, 0, 0));
 
 // ====================== execution ======================
-
 fightBtn.addEventListener('click', showClaws);
 fightBtn.addEventListener('click', makeMove);
 labels.forEach((el, id) => {
