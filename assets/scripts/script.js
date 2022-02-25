@@ -465,10 +465,10 @@ function newGame() {
   return true;
 }
 
-function tagAudioGameplay() {
-  const audio = document.getElementById('vol-gameplay');
-  audio.setAttribute('src', './assets/audio/saltimbancos.mp3');
-}
+// function tagAudioGameplay() {
+//   const audio = document.getElementById('vol-gameplay');
+//   audio.setAttribute('src', './assets/audio/saltimbancos.mp3');
+// }
 
 //function to change labels style on click event
 function changeStyle(index) {
