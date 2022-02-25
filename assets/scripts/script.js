@@ -209,7 +209,6 @@ function doRoundActions(winner) {
 // pushes first element of an array to another one 
 function moveCard(fromArr, toArr) {
   const movedCard = fromArr.splice(0, 1);
-
   toArr.push(movedCard[0]);
   return true;
 }
@@ -217,7 +216,6 @@ function moveCard(fromArr, toArr) {
 // sends current card to the end of array too
 function sendCardToBottom(arr) {
   const movedCard = arr.splice(0, 1);
-
   arr.push(movedCard[0]);
   return true;
 }
@@ -306,11 +304,11 @@ function revealAttrComparison() {
 function lookForWinner() {
   const winnerImg = document.getElementById('winner-img');
   if (deckP1.length === 0) {
-    changeDisplayToWinnerPage('Jogador 1 venceu!');
-    winnerImg.setAttribute('src', deckP1[deckP1.length - 1].img);
-  } else if (deckP2.length === 0) {
     changeDisplayToWinnerPage('Jogador 2 venceu!');
-    winnerImg.setAttribute('src', deckP2[deckP2.length - 1].img);
+    winnerImg.setAttribute('src', (deckP2[deckP2.length - 1].img));
+  } else if (deckP2.length === 0) {
+    changeDisplayToWinnerPage('Jogador 1 venceu!');
+    winnerImg.setAttribute('src', (deckP1[deckP1.length - 1].img));
   }
   return true;
 }
@@ -437,7 +435,11 @@ function changeDisplayToWinnerPage(text) {
   home.setAttribute("class", "row d-none flex-column align-items-center");
   winnerPage.setAttribute("class", "row d-flex align-items-center justify-content-center body-size");
   textWinner.innerHTML = text;
-  tagAudioWinner();
+  const audio = document.getElementById('vol-gameplay');
+  audio.setAttribute('src', '');
+  const winnerSong = new Audio('./assets/audio/thug-life2.mp3');
+  winnerSong.volume = 0.4;
+  winnerSong.play();
   return true;
 }
 
@@ -463,12 +465,6 @@ function newGame() {
   return true;
 }
 
-// change music home and winners' page
-function tagAudioWinner() {
-  const audio = document.getElementById('vol-gameplay');
-  audio.setAttribute('src', './assets/audio/thug-life2.mp3');
-}
-
 function tagAudioGameplay() {
   const audio = document.getElementById('vol-gameplay');
   audio.setAttribute('src', './assets/audio/saltimbancos.mp3');
@@ -477,7 +473,7 @@ function tagAudioGameplay() {
 //function to change labels style on click event
 function changeStyle(index) {
   labels.forEach((el, id) => {
-    if (id === index || id === index + 3) {
+    if (id === index || id === index + 3 || id === index - 3) {
       el.style.backgroundColor = '#f6cb09';
       el.style.border = '5px solid #f6b709';
     } else {
@@ -559,4 +555,5 @@ fightBtn.addEventListener('click', makeMove);
 labels.forEach((el, id) => {
   el.setAttribute(`onclick`, `changeStyle(${id})`);
 });
+
 newGame();
